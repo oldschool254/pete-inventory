@@ -5,6 +5,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Capt. Pete's Treasures</title>
+<link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEwAACxMBAJqcGAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAMCSURBVHic7dAxAQAAAMKg9U9tCy+gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAeAMBuAABHgAAAABJRU5ErkJggg==">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Pete Inventory">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Source+Serif+4:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -350,6 +354,56 @@ footer{text-align:center;padding:22px;font-family:'Bebas Neue',sans-serif;font-s
   var items = JSON.parse(localStorage.getItem('pt') || '[]');
   var evs   = JSON.parse(localStorage.getItem('pe') || '[]');
   var editId = null, editEvId = null;
+
+  // ─── IndexedDB for photos (much larger storage than localStorage) ───
+  var DB = null;
+  var DB_NAME = 'PeteTreasures', DB_VER = 1, DB_STORE = 'photos';
+  function openDB(cb) {
+    if (DB) { cb(DB); return; }
+    var req = indexedDB.open(DB_NAME, DB_VER);
+    req.onupgradeneeded = function(e) {
+      e.target.result.createObjectStore(DB_STORE);
+    };
+    req.onsuccess = function(e) { DB = e.target.result; cb(DB); };
+    req.onerror   = function()  { cb(null); };
+  }
+  function dbSavePhotos(listingId, photos, cb) {
+    openDB(function(db) {
+      if (!db) { cb && cb(); return; }
+      var tx  = db.transaction(DB_STORE, 'readwrite');
+      var st  = tx.objectStore(DB_STORE);
+      st.put(photos, listingId);
+      tx.oncomplete = function() { cb && cb(); };
+      tx.onerror    = function() { cb && cb(); };
+    });
+  }
+  function dbLoadPhotos(listingId, cb) {
+    openDB(function(db) {
+      if (!db) { cb([]); return; }
+      var tx  = db.transaction(DB_STORE, 'readonly');
+      var req = tx.objectStore(DB_STORE).get(listingId);
+      req.onsuccess = function() { cb(req.result || []); };
+      req.onerror   = function() { cb([]); };
+    });
+  }
+  function dbDeletePhotos(listingId) {
+    openDB(function(db) {
+      if (!db) return;
+      var tx = db.transaction(DB_STORE, 'readwrite');
+      tx.objectStore(DB_STORE).delete(listingId);
+    });
+  }
+  function loadAllListingPhotos(cb) {
+    var remaining = listings.length;
+    if (!remaining) { cb(); return; }
+    listings.forEach(function(l) {
+      dbLoadPhotos(l.id, function(photos) {
+        l.photos = photos;
+        remaining--;
+        if (remaining === 0) cb();
+      });
+    });
+  }
   var now = new Date(), calY = now.getFullYear(), calM = now.getMonth();
 
   var CATS = {boat:'Boat',motor:'Motor',trailer:'Trailer','marine-parts':'Marine Parts','non-marine':'Non-Marine',other:'Other'};
@@ -676,11 +730,16 @@ footer{text-align:center;padding:22px;font-family:'Bebas Neue',sans-serif;font-s
   var pendingPhotos = []; // base64 strings
 
   function saveListings() {
-    try {
-      localStorage.setItem('pl', JSON.stringify(listings));
-    } catch(e) {
-      alert('Storage full! Try removing some photos from listings to free up space.');
-    }
+    // Save metadata (no photos) to localStorage - always small
+    var meta = listings.map(function(l) {
+      var copy = {}; Object.keys(l).forEach(function(k){ if(k!=='photos') copy[k]=l[k]; });
+      return copy;
+    });
+    try { localStorage.setItem('pl', JSON.stringify(meta)); } catch(e) {}
+    // Save photos to IndexedDB (no size limit issues)
+    listings.forEach(function(l) {
+      dbSavePhotos(l.id, l.photos||[]);
+    });
   }
 
   function rListings() {
@@ -774,7 +833,7 @@ footer{text-align:center;padding:22px;font-family:'Bebas Neue',sans-serif;font-s
         var img = new Image();
         img.onload = function() {
           // Compress: max 800px wide, 70% quality JPEG
-          var maxW = 800, maxH = 800;
+          var maxW = 600, maxH = 600;
           var w = img.width, h = img.height;
           if (w > maxW) { h = Math.round(h * maxW / w); w = maxW; }
           if (h > maxH) { w = Math.round(w * maxH / h); h = maxH; }
@@ -782,7 +841,14 @@ footer{text-align:center;padding:22px;font-family:'Bebas Neue',sans-serif;font-s
           canvas.width = w; canvas.height = h;
           var ctx = canvas.getContext('2d');
           ctx.drawImage(img, 0, 0, w, h);
-          var compressed = canvas.toDataURL('image/jpeg', 0.70);
+          var compressed = canvas.toDataURL('image/jpeg', 0.55);
+          // Check size ~30KB max per photo
+          if (compressed.length > 80000) {
+            canvas.width = Math.round(w*0.6); canvas.height = Math.round(h*0.6);
+            ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+            compressed = canvas.toDataURL('image/jpeg', 0.45);
+          }
           pendingPhotos.push(compressed);
           processed++;
           if (processed === toProcess.length) renderPhotoPreviews();
@@ -812,8 +878,12 @@ footer{text-align:center;padding:22px;font-family:'Bebas Neue',sans-serif;font-s
     };
     if (editListingId) { listings[listings.findIndex(function(x){ return x.id===editListingId; })] = l; }
     else { listings.unshift(l); }
-    saveListings(); ge('lmo').classList.remove('on'); rListings();
-    toast('Listing Saved', l.title + ' is ready to share!', false);
+    // Save photos to IndexedDB, then save metadata and refresh
+    dbSavePhotos(l.id, pendingPhotos.slice(), function() {
+      l.photos = pendingPhotos.slice();
+      saveListings(); ge('lmo').classList.remove('on'); rListings();
+      toast('Listing Saved', l.title + ' is ready to share!', false);
+    });
   });
 
   function copyListing(id) {
@@ -839,6 +909,7 @@ footer{text-align:center;padding:22px;font-family:'Bebas Neue',sans-serif;font-s
 
   function delListing(id) {
     if (!confirm('Delete this listing?')) return;
+    dbDeletePhotos(id);
     listings = listings.filter(function(x){ return x.id!==id; });
     saveListings(); rListings();
   }
@@ -855,7 +926,12 @@ footer{text-align:center;padding:22px;font-family:'Bebas Neue',sans-serif;font-s
   // INIT
   if ('Notification' in window && Notification.permission==='default') Notification.requestPermission();
   evs.forEach(function(ev){ schedAlarm(ev); });
+  // Load listings metadata, then photos from IndexedDB
   listings = JSON.parse(localStorage.getItem('pl') || '[]');
+  loadAllListingPhotos(function() {
+    // Photos loaded - if on listings page refresh it
+    if (document.getElementById('listings').classList.contains('on')) rListings();
+  });
   rDash();
 
 })();

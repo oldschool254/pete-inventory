@@ -125,6 +125,24 @@ nav::-webkit-scrollbar{display:none}
 @keyframes tin{from{opacity:0;transform:translateX(30px)}to{opacity:1;transform:translateX(0)}}
 @keyframes tout{from{opacity:1}to{opacity:0;transform:translateX(30px)}}
 ::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:#2a4a7a;border-radius:3px}
+.fi2 textarea,.fi2[rows]{resize:vertical}
+textarea.fi2{resize:vertical;font-family:"Source Serif 4",serif}
+.lcard{background:#122040;border:1px solid #2a4a7a;border-left:4px solid #5090e0;border-radius:10px;overflow:hidden;animation:si .3s;transition:border-color .2s,transform .15s;margin-bottom:10px}
+.lcard:hover{border-color:#c9a84c;transform:translateY(-1px)}
+.lcard-photos{display:flex;gap:4px;overflow-x:auto;padding:12px 12px 0 12px;scrollbar-width:none}
+.lcard-photos::-webkit-scrollbar{display:none}
+.lcard-photos img{width:120px;height:90px;object-fit:cover;border-radius:6px;flex-shrink:0;border:1px solid #2a4a7a;cursor:pointer}
+.lcard-body{padding:14px}
+.lcard-title{font-family:"Bebas Neue",sans-serif;font-size:20px;letter-spacing:2px;color:#f0d070;margin-bottom:6px}
+.lcard-price{font-family:"Bebas Neue",sans-serif;font-size:24px;color:#4aaa70;letter-spacing:1px;margin-bottom:8px}
+.lcard-desc{font-size:13px;color:#b0c0d8;line-height:1.6;margin-bottom:10px;white-space:pre-wrap}
+.lcard-meta{font-family:"JetBrains Mono",monospace;font-size:11px;color:#6080a0;margin-bottom:10px}
+.lcard-actions{display:flex;gap:8px;flex-wrap:wrap}
+.copy-flash{animation:flash .6s ease}
+@keyframes flash{0%{background:#c9a84c;color:#050e1a}100%{background:#2a7a48;color:#e0ffe0}}
+.img-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.95);z-index:300;align-items:center;justify-content:center;cursor:pointer}
+.img-modal.on{display:flex}
+.img-modal img{max-width:95vw;max-height:90vh;object-fit:contain;border-radius:8px}
 footer{text-align:center;padding:22px;font-family:'Bebas Neue',sans-serif;font-size:11px;letter-spacing:3px;color:#a08030;border-top:1px solid #2a4a7a;margin-top:40px}
 @media(max-width:500px){.crow{grid-template-columns:1fr 1fr}.frow{grid-template-columns:1fr}.icard{grid-template-columns:1fr}.iact{flex-direction:row;justify-content:space-between;align-items:center}.cday{min-height:54px;padding:4px}.cdot{display:none}.cday.he::after{content:'\25CF';position:absolute;bottom:3px;right:5px;color:#c9a84c;font-size:8px}}
 </style>
@@ -144,6 +162,7 @@ footer{text-align:center;padding:22px;font-family:'Bebas Neue',sans-serif;font-s
   <button class="tab" data-page="sold">&#9989; Sold</button>
   <button class="tab" data-page="calc">&#129518; Calc</button>
   <button class="tab" data-page="cal">&#128197; Calendar</button>
+  <button class="tab" data-page="listings">&#128247; Listings</button>
 </nav>
 
 <div id="dash" class="pg on">
@@ -213,6 +232,44 @@ footer{text-align:center;padding:22px;font-family:'Bebas Neue',sans-serif;font-s
   </div>
   <div class="stitle" id="evlbl">Upcoming Events</div>
   <div id="evlist" class="elist"></div>
+</div>
+
+<div id="listings" class="pg">
+  <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:16px">
+    <div class="stitle" style="margin:0;border:none;padding:0">For Sale Listings</div>
+    <button class="btn btnp" id="btnAddListing">+ New Listing</button>
+  </div>
+  <div id="llist" class="ilist"></div>
+</div>
+
+<!-- Listing Modal -->
+
+<div class="mo" id="lmo">
+  <div class="mbox" style="max-width:600px">
+    <div class="mtitle" id="lmtitle">CREATE LISTING</div>
+    <div class="fg">
+      <label class="fl2">Link to Inventory Item (optional)</label>
+      <select id="linv" class="fi2">
+        <option value="">-- Select item or create standalone --</option>
+      </select>
+    </div>
+    <div class="fg"><label class="fl2">Listing Title *</label><input type="text" id="ltitle" class="fi2" placeholder="e.g. 2005 Yamaha 115hp 4-Stroke Outboard"></div>
+    <div class="frow">
+      <div class="fg"><label class="fl2">Asking Price ($) *</label><input type="number" id="lprice" class="fi2" placeholder="0.00" min="0" step="0.01"></div>
+      <div class="fg"><label class="fl2">Location</label><input type="text" id="lloc" class="fi2" placeholder="e.g. Freeport, TX"></div>
+    </div>
+    <div class="fg"><label class="fl2">Description</label><textarea id="ldesc" class="fi2" rows="4" placeholder="Condition, hours, what works, what needs work, extras included..."></textarea></div>
+    <div class="fg">
+      <label class="fl2">Photos (up to 5)</label>
+      <input type="file" id="lphotos" class="fi2" accept="image/*" multiple style="padding:8px;cursor:pointer">
+      <div id="lphoto-preview" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:10px"></div>
+    </div>
+    <div class="fg"><label class="fl2">Contact / Notes</label><input type="text" id="lcontact" class="fi2" placeholder="e.g. Call or text Pete at (979) 555-1234"></div>
+    <div class="mact">
+      <button class="btn btnd" id="btnCancelListing">Cancel</button>
+      <button class="btn btns" id="btnSaveListing">Save Listing</button>
+    </div>
+  </div>
 </div>
 
 <!-- Item Modal -->
@@ -317,7 +374,8 @@ footer{text-align:center;padding:22px;font-family:'Bebas Neue',sans-serif;font-s
     else if (id === 'inv')  rInv();
     else if (id === 'sold') rSold();
     else if (id === 'calc') rSum();
-    else if (id === 'cal')  { rCal(); rEvList(); }
+    else if (id === 'cal')       { rCal(); rEvList(); }
+    else if (id === 'listings') rListings();
   }
 
   document.querySelectorAll('.tab').forEach(function(btn) {
@@ -611,9 +669,170 @@ footer{text-align:center;padding:22px;font-family:'Bebas Neue',sans-serif;font-s
     setTimeout(function() { t.style.animation='tout .4s ease forwards'; setTimeout(function(){ t.remove(); },400); }, isAlarm?8000:3500);
   }
 
+
+  // ─── LISTINGS ───────────────────────────────────────────────
+  var listings = JSON.parse(localStorage.getItem('pl') || '[]');
+  var editListingId = null;
+  var pendingPhotos = []; // base64 strings
+
+  function saveListings() { localStorage.setItem('pl', JSON.stringify(listings)); }
+
+  function rListings() {
+    var el = ge('llist');
+    if (!listings.length) { el.innerHTML = emp('No Listings Yet','Create a listing to share on Facebook Marketplace, OfferUp, Craigslist and more'); return; }
+    el.innerHTML = listings.map(function(l) {
+      var photos = l.photos && l.photos.length
+        ? '<div class="lcard-photos">'+l.photos.map(function(p){ return '<img src="'+p+'" data-action="viewphoto" data-src="'+p+'">'; }).join('')+'</div>'
+        : '';
+      return '<div class="lcard">'+photos+
+        '<div class="lcard-body">'+
+        '<div class="lcard-title">'+l.title+'</div>'+
+        '<div class="lcard-price">$'+Number(l.price||0).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})+'</div>'+
+        (l.desc?'<div class="lcard-desc">'+l.desc+'</div>':'')+
+        '<div class="lcard-meta">'+(l.loc?'&#128205; '+l.loc+'&nbsp;&nbsp;':'')+( l.contact?'&#128222; '+l.contact:'')+'</div>'+
+        '<div class="lcard-actions">'+
+        '<button class="btn btnp btnsm" data-action="copylisting" data-id="'+l.id+'">&#128203; Copy Post</button>'+
+        '<button class="btn btns btnsm" data-action="editlisting" data-id="'+l.id+'">Edit</button>'+
+        '<button class="btn btnd btnsm" data-action="dellisting" data-id="'+l.id+'">Delete</button>'+
+        '</div>'+
+        '</div></div>';
+    }).join('');
+  }
+
+  // Populate inventory dropdown when listing modal opens
+  function populateInvDropdown() {
+    var sel = ge('linv');
+    sel.innerHTML = '<option value="">-- Select item or create standalone --</option>';
+    items.filter(function(i){ return i.status !== 'sold'; }).forEach(function(i) {
+      var opt = document.createElement('option');
+      opt.value = i.id;
+      opt.textContent = i.n + (i.mo ? ' - '+i.mo : '') + ' (In Stock)';
+      sel.appendChild(opt);
+    });
+  }
+
+  ge('linv').addEventListener('change', function() {
+    var id = this.value;
+    if (!id) return;
+    var item = items.find(function(i){ return i.id === id; });
+    if (!item) return;
+    ge('ltitle').value = item.n + (item.mo ? ' - '+item.mo : '');
+    if (item.sp) ge('lprice').value = item.sp;
+  });
+
+  ge('btnAddListing').addEventListener('click', function() { openAddListing(); });
+
+  function openAddListing() {
+    editListingId = null; pendingPhotos = [];
+    ge('lmtitle').textContent = 'CREATE LISTING';
+    ge('ltitle').value=''; ge('lprice').value=''; ge('lloc').value='';
+    ge('ldesc').value=''; ge('lcontact').value='';
+    ge('lphotos').value='';
+    ge('lphoto-preview').innerHTML='';
+    populateInvDropdown();
+    ge('lmo').classList.add('on');
+  }
+
+  function openEditListing(id) {
+    var l = listings.find(function(x){ return x.id===id; }); if (!l) return;
+    editListingId = id; pendingPhotos = l.photos ? l.photos.slice() : [];
+    ge('lmtitle').textContent = 'EDIT LISTING';
+    ge('ltitle').value = l.title||''; ge('lprice').value = l.price||'';
+    ge('lloc').value = l.loc||''; ge('ldesc').value = l.desc||'';
+    ge('lcontact').value = l.contact||'';
+    ge('lphotos').value='';
+    populateInvDropdown();
+    ge('linv').value = l.invId||'';
+    renderPhotoPreviews();
+    ge('lmo').classList.add('on');
+  }
+
+  function renderPhotoPreviews() {
+    ge('lphoto-preview').innerHTML = pendingPhotos.map(function(p,i) {
+      return '<div style="position:relative;display:inline-block">'+
+        '<img src="'+p+'" style="width:80px;height:60px;object-fit:cover;border-radius:5px;border:1px solid #2a4a7a">'+
+        '<button data-action="removephoto" data-idx="'+i+'" style="position:absolute;top:-6px;right:-6px;background:#e05050;color:#fff;border:none;border-radius:50%;width:18px;height:18px;font-size:11px;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1">x</button>'+
+        '</div>';
+    }).join('');
+  }
+
+  ge('lphotos').addEventListener('change', function() {
+    var files = Array.from(this.files);
+    var remaining = 5 - pendingPhotos.length;
+    if (remaining <= 0) { alert('Max 5 photos reached. Remove one first.'); this.value=''; return; }
+    files.slice(0, remaining).forEach(function(file) {
+      var reader = new FileReader();
+      reader.onload = function(e) {
+        pendingPhotos.push(e.target.result);
+        renderPhotoPreviews();
+      };
+      reader.readAsDataURL(file);
+    });
+    this.value='';
+  });
+
+  ge('btnCancelListing').addEventListener('click', function() { ge('lmo').classList.remove('on'); });
+  ge('lmo').addEventListener('click', function(e) { if (e.target===this) ge('lmo').classList.remove('on'); });
+
+  ge('btnSaveListing').addEventListener('click', function() {
+    var title = ge('ltitle').value.trim(), price = parseFloat(ge('lprice').value)||0;
+    if (!title) { alert('Title required!'); return; }
+    if (!price) { alert('Price required!'); return; }
+    var l = {
+      id: editListingId || Date.now().toString(),
+      invId: ge('linv').value,
+      title: title, price: price,
+      loc: ge('lloc').value.trim(),
+      desc: ge('ldesc').value.trim(),
+      contact: ge('lcontact').value.trim(),
+      photos: pendingPhotos.slice()
+    };
+    if (editListingId) { listings[listings.findIndex(function(x){ return x.id===editListingId; })] = l; }
+    else { listings.unshift(l); }
+    saveListings(); ge('lmo').classList.remove('on'); rListings();
+    toast('Listing Saved', l.title + ' is ready to share!', false);
+  });
+
+  function copyListing(id) {
+    var l = listings.find(function(x){ return x.id===id; }); if (!l) return;
+    var txt = '🚤 FOR SALE: ' + l.title + '\n\n';
+    txt += '💰 Asking: $' + Number(l.price||0).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}) + '\n\n';
+    if (l.desc) txt += l.desc + '\n\n';
+    if (l.loc)  txt += '📍 Location: ' + l.loc + '\n';
+    if (l.contact) txt += '📞 ' + l.contact + '\n';
+    txt += '\n#forsale #boat #fishing #gulfcoast';
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(txt).then(function() {
+        toast('Copied!', 'Post text copied — paste into Facebook Marketplace, OfferUp, or Craigslist!', false);
+      });
+    } else {
+      var ta = document.createElement('textarea');
+      ta.value = txt; ta.style.position='fixed'; ta.style.opacity='0';
+      document.body.appendChild(ta); ta.focus(); ta.select();
+      try { document.execCommand('copy'); toast('Copied!', 'Paste into Facebook Marketplace or any classifieds!', false); } catch(e) {}
+      document.body.removeChild(ta);
+    }
+  }
+
+  function delListing(id) {
+    if (!confirm('Delete this listing?')) return;
+    listings = listings.filter(function(x){ return x.id!==id; });
+    saveListings(); rListings();
+  }
+
+  // Image viewer modal
+  var imgModal = document.createElement('div');
+  imgModal.className = 'img-modal';
+  imgModal.innerHTML = '<img id="imgModalImg" src="">';
+  document.body.appendChild(imgModal);
+  imgModal.addEventListener('click', function() { this.classList.remove('on'); });
+
+  // Wire up listing actions via existing event delegation
+  // (already handled in main delegator below — add cases)
   // INIT
   if ('Notification' in window && Notification.permission==='default') Notification.requestPermission();
   evs.forEach(function(ev){ schedAlarm(ev); });
+  listings = JSON.parse(localStorage.getItem('pl') || '[]');
   rDash();
 
 })();

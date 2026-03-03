@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CAPT. PETES TREASURES</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Source+Serif+4:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:#0a1628 !important;color:#a89848;font-family:"Source Serif 4",Georgia,serif;min-height:100vh;overflow-x:hidden}
+header{background:linear-gradient(180deg,#060e1c,#0a1628);border-bottom:2px solid #c9a84c;padding:0 20px;position:sticky;top:0;z-index:100;box-shadow:0 4px 30px rgba(0,0,0,.9)}
+.hdr{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:74px}
+.logo{display:flex;align-items:center;gap:14px;cursor:pointer}
+.logo-name{font-family:"Bebas Neue",sans-serif;font-size:20px;letter-spacing:4px;color:#e0bc60;text-shadow:0 0 20px rgba(201,168,76,.4);display:block}
+.logo-sub{font-family:"Bebas Neue",sans-serif;font-size:12px;letter-spacing:5px;color:#8a6820;display:block;margin-top:3px}
+.tagline{font-family:"Bebas Neue",sans-serif;font-size:13px;color:#8a6820;letter-spacing:3px;display:none}
+@media(min-width:520px){.tagline{display:block}}
+nav{background:#070f1c;border-bottom:1px solid #1e3a6a;display:flex;overflow-x:auto;scrollbar-width:none;position:sticky;top:74px;z-index:99}
+nav::-webkit-scrollbar{display:none}
+.tab{padding:13px 22px;font-family:"Bebas Neue",sans-serif;font-size:14px;letter-spacing:2px;color:#507090;background:none;border:none;border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap;transition:all .2s}
+.tab:hover{color:#c9a84c;background:rgba(201,168,76,.04)}
+.tab.on{color:#e0bc60;border-bottom-color:#c9a84c;background:rgba(201,168,76,.07)}
+.pg{display:none;padding:22px 16px;max-width:1100px;margin:0 auto}
+.pg.on{display:block}
+.grid4{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:22px}
+@media(min-width:600px){.grid4{grid-template-columns:repeat(4,1fr)}}
+.sc{background:#0f2040;border:1px solid #1e3a6a;border-radius:10px;padding:16px;position:relative;overflow:hidden}
+.sc::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:var(--a,#c9a84c)}
+.sc.g{--a:#4aaa70}.sc.r{--a:#c84848}.sc.b{--a:#4880d0}
+.slbl{font-family:"Bebas Neue",sans-serif;font-size:11px;letter-spacing:2.5px;color:#507090;text-transform:uppercase;margin-bottom:8px}
+.sval{font-family:"Bebas Neue",sans-serif;font-size:28px;letter-spacing:1px;color:#e0bc60;line-height:1}
+.sval.g{color:#4aaa70}.sval.r{color:#c84848}.sval.b{color:#4880d0}
+.ssub{font-size:11px;color:#507090;margin-top:5px;font-family:"JetBrains Mono",monospace}
+.stitle{font-family:"Bebas Neue",sans-serif;font-size:20px;letter-spacing:4px;color:#c9a84c;margin-bottom:12px;margin-top:24px;border-bottom:1px solid #1e3a6a;padding-bottom:8px}
+.card{background:#0f2040;border:1px solid #1e3a6a;border-radius:10px;padding:20px;margin-bottom:14px}
+.cbrow{display:flex;align-items:center;gap:10px;margin-bottom:11px}
+.cblbl{font-family:"Bebas Neue",sans-serif;font-size:12px;letter-spacing:1.5px;color:#a89848;width:120px;text-transform:uppercase;flex-shrink:0}
+.cbtrk{flex:1;height:6px;background:rgba(255,255,255,.04);border-radius:3px;overflow:hidden}
+.cbfil{height:100%;border-radius:3px;transition:width .5s}
+.cbval{font-family:"JetBrains Mono",monospace;font-size:12px;color:#c9a84c;width:70px;text-align:right}
+.btn{padding:9px 18px;border-radius:6px;border:none;font-family:"Bebas Neue",sans-serif;font-size:14px;letter-spacing:2px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;white-space:nowrap;transition:all .2s}
+.btnp{background:#c9a84c;color:#060e1c}.btnp:hover{background:#e0bc60;transform:translateY(-1px);box-shadow:0 4px 14px rgba(201,168,76,.3)}
+.btns{background:#3a8858;color:#030e06;border:1px solid #4aaa70}.btns:hover{background:#4aaa70}
+.btnd{background:rgba(160,48,48,.15);color:#c84848;border:1px solid rgba(160,48,48,.3)}.btnd:hover{background:rgba(160,48,48,.28)}
+.btnsm{padding:5px 10px;font-size:12px}
+.ictrl{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.ictrl select,.ictrl input{background:#112248;border:1px solid #1e3a6a;border-radius:6px;padding:9px 13px;color:#e0bc60;font-family:"Source Serif 4",serif;font-size:14px;outline:none;flex:1;min-width:140px;transition:border-color .2s}
+.ictrl select:focus,.ictrl input:focus{border-color:#c9a84c}
+.ictrl select option{background:#0e1e38}
+.ilist{display:flex;flex-direction:column;gap:10px}
+.icard{background:#0f2040;border:1px solid #1e3a6a;border-left:3px solid #8a6820;border-radius:8px;padding:15px;display:grid;grid-template-columns:1fr auto;gap:12px;transition:border-color .2s,transform .15s;animation:si .3s}
+@keyframes si{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.icard:hover{border-color:#c9a84c;transform:translateY(-1px)}
+.icard.sold{opacity:.5;border-left-color:#4aaa70}
+.iname{font-family:"Bebas Neue",sans-serif;font-size:18px;letter-spacing:2px;color:#e0bc60;margin-bottom:5px}
+.imeta{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:8px}
+.tag{font-family:"Bebas Neue",sans-serif;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;padding:2px 8px;border-radius:3px;background:rgba(201,168,76,.08);color:#c9a84c;border:1px solid rgba(201,168,76,.18)}
+.tag.ts{background:rgba(74,170,112,.1);color:#4aaa70;border-color:rgba(74,170,112,.2)}
+.tag.ta{background:rgba(72,128,208,.1);color:#4880d0;border-color:rgba(72,128,208,.2)}
+.ifin{display:flex;gap:14px;flex-wrap:wrap}
+.fi{font-size:12px;color:#507090;font-family:"JetBrains Mono",monospace}
+.fi span{color:#a89848;font-weight:600}
+.fp{color:#4aaa70;font-weight:700}.fl{color:#c84848;font-weight:700}
+.iact{display:flex;flex-direction:column;gap:6px;align-items:flex-end;justify-content:space-between}
+.pbadge{font-family:"Bebas Neue",sans-serif;font-size:18px;letter-spacing:1px;padding:4px 10px;border-radius:5px;white-space:nowrap;background:rgba(74,170,112,.1);color:#4aaa70;border:1px solid rgba(74,170,112,.22)}
+.pbadge.l{background:rgba(160,48,48,.1);color:#c84848;border-color:rgba(160,48,48,.22)}
+.pbadge.p{background:rgba(72,128,208,.1);color:#4880d0;border-color:rgba(72,128,208,.22);font-size:12px;padding:5px 10px;letter-spacing:2px}
+.inote{font-size:12px;color:#507090;margin-top:4px;font-style:italic}
+.mo{display:none;position:fixed;inset:0;background:rgba(3,7,16,.95);z-index:200;padding:20px;overflow-y:auto;backdrop-filter:blur(8px)}
+.mo.on{display:flex;align-items:flex-start;justify-content:center;padding-top:36px}
+.mbox{background:linear-gradient(160deg,#0e1e38,#112248);border:1px solid #8a6820;border-top:2px solid #c9a84c;border-radius:12px;padding:26px 22px;width:100%;max-width:540px;box-shadow:0 20px 80px rgba(0,0,0,.97);animation:mi .3s}
+@keyframes mi{from{opacity:0;transform:scale(.95) translateY(-8px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.mtitle{font-family:"Bebas Neue",sans-serif;font-size:22px;letter-spacing:4px;color:#e0bc60;margin-bottom:18px;padding-bottom:10px;border-bottom:1px solid #1e3a6a}
+.fg{margin-bottom:13px}
+.fl2{display:block;font-family:"Bebas Neue",sans-serif;font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:#8a6820;margin-bottom:5px}
+.fi2{width:100%;background:rgba(10,22,40,.7);border:1px solid #1e3a6a;border-radius:6px;padding:10px 13px;color:#e0bc60;font-family:"Source Serif 4",serif;font-size:14px;outline:none;transition:border-color .2s,box-shadow .2s}
+.fi2:focus{border-color:#c9a84c;box-shadow:0 0 0 3px rgba(201,168,76,.1)}
+.fi2 option{background:#0e1e38}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.mact{display:flex;gap:10px;justify-content:flex-end;margin-top:18px;flex-wrap:wrap}
+.crbox{background:rgba(74,170,112,.07);border:1px solid rgba(74,170,112,.2);border-radius:8px;padding:18px;text-align:center;margin-top:14px}
+.crlbl{font-family:"Bebas Neue",sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#507090;margin-bottom:6px}
+.crval{font-family:"Bebas Neue",sans-serif;font-size:46px;color:#4aaa70;letter-spacing:2px}
+.crval.neg{color:#c84848}
+.crow{display:grid;grid-template-columns:1fr 1fr 1fr;gap:11px;margin-bottom:11px}
+.cline{font-family:"JetBrains Mono",monospace;font-size:12px;color:#507090;display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #1e3a6a}
+.cline span{color:#a89848;font-weight:600}
+.empty{text-align:center;padding:50px 20px;color:#507090}
+.ei{font-size:44px;margin-bottom:12px}
+.et{font-family:"Bebas Neue",sans-serif;font-size:20px;letter-spacing:3px;color:#c9a84c;margin-bottom:6px}
+.es{font-size:13px;color:#507090}
+.cal-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.cal-ml{font-family:"Bebas Neue",sans-serif;font-size:26px;letter-spacing:4px;color:#e0bc60}
+.cnav{background:#112248;border:1px solid #1e3a6a;border-radius:6px;color:#c9a84c;font-size:20px;width:38px;height:38px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.cnav:hover{background:#142850;color:#e0bc60}
+.cgrid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px}
+.cdow{text-align:center;font-family:"Bebas Neue",sans-serif;font-size:11px;letter-spacing:2px;color:#8a6820;padding:6px 0;text-transform:uppercase}
+.cday{background:#0f2040;border:1px solid #1e3a6a;border-radius:6px;min-height:72px;padding:6px;cursor:pointer;transition:border-color .2s,background .2s;position:relative}
+.cday:hover{border-color:#8a6820;background:#112248}
+.cday.td{border-color:#c9a84c !important;background:rgba(201,168,76,.06) !important}
+.cday.om{opacity:.15;pointer-events:none}
+.cday.he{border-color:rgba(201,168,76,.35)}
+.cdn{font-family:"Bebas Neue",sans-serif;font-size:14px;color:#a89848;margin-bottom:3px}
+.cday.td .cdn{color:#e0bc60;font-size:15px}
+.cdot{font-family:"JetBrains Mono",monospace;font-size:9px;padding:1px 5px;border-radius:2px;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:600}
+.cdot.buy{background:rgba(201,168,76,.15);color:#c9a84c;border-left:2px solid #c9a84c}
+.cdot.sell{background:rgba(74,170,112,.15);color:#4aaa70;border-left:2px solid #4aaa70}
+.cdot.appointment{background:rgba(72,128,208,.15);color:#4880d0;border-left:2px solid #4880d0}
+.cdot.reminder{background:rgba(200,72,72,.15);color:#c84848;border-left:2px solid #c84848}
+.elist{display:flex;flex-direction:column;gap:8px}
+.eitem{background:#0f2040;border:1px solid #1e3a6a;border-left:3px solid #8a6820;border-radius:8px;padding:13px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px;animation:si .3s;transition:border-color .2s}
+.eitem:hover{border-color:#c9a84c}
+.eitem.eb{border-left-color:#c9a84c}.eitem.es2{border-left-color:#4aaa70}.eitem.ea{border-left-color:#4880d0}.eitem.er{border-left-color:#c84848}
+.etitle{font-family:"Bebas Neue",sans-serif;font-size:17px;letter-spacing:2px;color:#e0bc60;margin-bottom:4px}
+.emeta{font-size:12px;color:#507090;display:flex;gap:10px;flex-wrap:wrap;font-family:"JetBrains Mono",monospace}
+.emeta span{color:#a89848}
+.ebadge{font-family:"Bebas Neue",sans-serif;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;padding:2px 8px;border-radius:3px}
+.ebadge.buy{background:rgba(201,168,76,.12);color:#c9a84c}.ebadge.sell{background:rgba(74,170,112,.12);color:#4aaa70}.ebadge.appointment{background:rgba(72,128,208,.12);color:#4880d0}.ebadge.reminder{background:rgba(200,72,72,.12);color:#c84848}
+.tc{position:fixed;bottom:24px;right:20px;z-index:999;display:flex;flex-direction:column;gap:10px}
+.toast{background:#091830;border:1px solid #2a4e8a;border-top:2px solid #c9a84c;border-radius:10px;padding:13px 17px;max-width:310px;animation:tin .4s;box-shadow:0 8px 32px rgba(0,0,0,.95);font-size:13px;color:#a89848;font-family:"Source Serif 4",serif}
+.toast.alarm{border-top-color:#e0bc60;background:#131000}
+.ttitle{font-family:"Bebas Neue",sans-serif;font-size:16px;letter-spacing:3px;color:#e0bc60;margin-bottom:4px}
+@keyframes tin{from{opacity:0;transform:translateX(30px)}to{opacity:1;transform:translateX(0)}}
+@keyframes tout{from{opacity:1}to{opacity:0;transform:translateX(30px)}}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:#1e3a6a;border-radius:3px}
+footer{text-align:center;padding:22px;font-family:"Bebas Neue",sans-serif;font-size:11px;letter-spacing:3px;color:#8a6820;border-top:1px solid #1e3a6a;margin-top:40px}
+@media(max-width:500px){.crow{grid-template-columns:1fr 1fr}.frow{grid-template-columns:1fr}.icard{grid-template-columns:1fr}.iact{flex-direction:row;justify-content:space-between}.cday{min-height:52px;padding:4px}.cdot{display:none}.cday.he::after{content:"*";position:absolute;bottom:3px;right:5px;color:#c9a84c;font-size:12px}}
+</style>
+</head>
+<body>
+<header>
+<div class="hdr">
+<div class="logo" onclick="showPage('dash')">
+<div><span class="logo-name">CAPT. PETE'S</span><span class="logo-sub">Treasures</span></div>
+</div>
+<span class="tagline">BOATS &middot; MOTORS &middot; PARTS &middot; MORE</span>
+</div>
+</header>
+<nav>
+<button class="tab on" onclick="showPage('dash')">&#128202; Dashboard</button>
+<button class="tab" onclick="showPage('inv')">&#128676; Inventory</button>
+<button class="tab" onclick="showPage('sold')">&#9989; Sold</button>
+<button class="tab" onclick="showPage('calc')">&#129518; Calc</button>
+<button class="tab" onclick="showPage('cal')">&#128197; Calendar</button>
+</nav>
+<div id="dash" class="pg on">
+<div class="grid4" id="scards"></div>
+<div class="stitle">Profit by Category</div>
+<div class="card"><div id="cchart"></div></div>
+<div class="stitle">Recent Activity</div>
+<div id="recent" class="ilist"></div>
+</div>
+<div id="inv" class="pg">
+<div class="ictrl">
+<input type="text" id="sinv" placeholder="Search items..." oninput="rInv()">
+<select id="fcat" onchange="rInv()">
+<option value="">All Categories</option>
+<option value="boat">Boats</option><option value="motor">Motors</option><option value="trailer">Trailers</option>
+<option value="marine-parts">Marine Parts</option><option value="non-marine">Non-Marine</option><option value="other">Other</option>
+</select>
+<button class="btn btnp" onclick="openAdd()">+ Add Item</button>
+</div>
+<div id="ilist" class="ilist"></div>
+</div>
+<div id="sold" class="pg">
+<div class="stitle">Sold Items</div>
+<div id="slist" class="ilist"></div>
+</div>
+<div id="calc" class="pg">
+<div class="stitle">Quick Profit Calculator</div>
+<div class="card">
+<div class="crow">
+<div class="fg"><label class="fl2">Purchase Price</label><input type="number" id="cbuy" class="fi2" placeholder="0.00" oninput="doCalc()"></div>
+<div class="fg"><label class="fl2">Repair / Costs</label><input type="number" id="crep" class="fi2" placeholder="0.00" oninput="doCalc()"></div>
+<div class="fg"><label class="fl2">Sale Price</label><input type="number" id="csel" class="fi2" placeholder="0.00" oninput="doCalc()"></div>
+</div>
+<div class="cline">Total Invested <span id="cli">$0.00</span></div>
+<div class="cline">Sale Price <span id="cls">$0.00</span></div>
+<div class="cline">Profit / Loss <span id="clp">$0.00</span></div>
+<div class="cline">ROI <span id="clr">0%</span></div>
+<div class="crbox"><div class="crlbl">Net Profit</div><div class="crval" id="cbig">$0.00</div></div>
+</div>
+<div class="stitle">All-Time Summary</div>
+<div class="card" id="sumcard"></div>
+</div>
+<div id="cal" class="pg">
+<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:16px">
+<div class="stitle" style="margin:0;border:none;padding:0">Appointments &amp; Reminders</div>
+<button class="btn btnp" onclick="openEv()">+ Add Event</button>
+</div>
+<div class="card" style="padding:16px 14px">
+<div class="cal-hdr"><button class="cnav" onclick="calPrev()">&#8249;</button><div class="cal-ml" id="calml"></div><button class="cnav" onclick="calNext()">&#8250;</button></div>
+<div class="cgrid">
+<div class="cdow">Sun</div><div class="cdow">Mon</div><div class="cdow">Tue</div><div class="cdow">Wed</div><div class="cdow">Thu</div><div class="cdow">Fri</div><div class="cdow">Sat</div>
+<div id="ccells" style="display:contents"></div>
+</div>
+</div>
+<div class="stitle" id="evlbl">Upcoming Events</div>
+<div id="evlist" class="elist"></div>
+</div>
+<div class="mo" id="imo"><div class="mbox">
+<div class="mtitle" id="mtitle">ADD ITEM</div>
+<div class="frow"><div class="fg"><label class="fl2">Name *</label><input type="text" id="fn" class="fi2" placeholder="e.g. 2003 Bass Boat"></div>
+<div class="fg"><label class="fl2">Category</label><select id="fc" class="fi2"><option value="boat">Boat</option><option value="motor">Motor</option><option value="trailer">Trailer</option><option value="marine-parts">Marine Parts</option><option value="non-marine">Non-Marine</option><option value="other">Other</option></select></div></div>
+<div class="frow"><div class="fg"><label class="fl2">Purchase Price ($) *</label><input type="number" id="fb" class="fi2" placeholder="0.00" min="0" step="0.01"></div>
+<div class="fg"><label class="fl2">Repair Costs ($)</label><input type="number" id="frp" class="fi2" placeholder="0.00" min="0" step="0.01"></div></div>
+<div class="frow"><div class="fg"><label class="fl2">Sale Price ($)</label><input type="number" id="fsp" class="fi2" placeholder="0.00" min="0" step="0.01"></div>
+<div class="fg"><label class="fl2">Status</label><select id="fst" class="fi2"><option value="active">Active (In Stock)</option><option value="sold">Sold</option></select></div></div>
+<div class="fg"><label class="fl2">Year / Make / Model</label><input type="text" id="fmo" class="fi2" placeholder="e.g. 2005 Yamaha 115hp"></div>
+<div class="fg"><label class="fl2">Notes</label><input type="text" id="fno" class="fi2" placeholder="Condition, source, etc."></div>
+<div class="fg"><label class="fl2">Date Acquired</label><input type="date" id="fdt" class="fi2"></div>
+<div class="mact"><button class="btn btnd" onclick="closeM()">Cancel</button><button class="btn btns" onclick="saveItem()">Save Item</button></div>
+</div></div>
+<div class="mo" id="emo"><div class="mbox">
+<div class="mtitle" id="emtitle">ADD EVENT</div>
+<div class="fg"><label class="fl2">Title *</label><input type="text" id="eti" class="fi2" placeholder="e.g. Pick up bass boat from Billy"></div>
+<div class="frow"><div class="fg"><label class="fl2">Type</label><select id="ety" class="fi2"><option value="buy">Buying Trip</option><option value="sell">Sale / Meet Buyer</option><option value="appointment">Appointment</option><option value="reminder">Reminder</option></select></div>
+<div class="fg"><label class="fl2">Date *</label><input type="date" id="edt" class="fi2"></div></div>
+<div class="frow"><div class="fg"><label class="fl2">Time</label><input type="time" id="etm" class="fi2"></div>
+<div class="fg"><label class="fl2">Alarm</label><select id="eal" class="fi2"><option value="">No alarm</option><option value="0">At event time</option><option value="15">15 min before</option><option value="30">30 min before</option><option value="60">1 hour before</option><option value="1440">1 day before</option></select></div></div>
+<div class="fg"><label class="fl2">Location / Details</label><input type="text" id="eno" class="fi2" placeholder="Address, price, notes..."></div>
+<div class="mact"><button class="btn btnd" onclick="closeEM()">Cancel</button><button class="btn btns" onclick="saveEv()">Save Event</button></div>
+</div></div>
+<div class="tc" id="tc"></div>
+<footer>CAPT. PETE'S TREASURES &middot; BUILT FOR THE HUSTLE &middot; 2026</footer>
+<script>
+
+var items = JSON.parse(localStorage.getItem(‘pt’) || ‘[]’);
+var evs   = JSON.parse(localStorage.getItem(‘pe’) || ‘[]’);
+var eid = null, eeid = null;
+var nd = new Date(), cy = nd.getFullYear(), cm = nd.getMonth();
+var CATS = {boat:‘Boat’,motor:‘Motor’,trailer:‘Trailer’,‘marine-parts’:‘Marine Parts’,‘non-marine’:‘Non-Marine’,other:‘Other’};
+var CC   = {boat:’#4880d0’,motor:’#c9a84c’,trailer:’#4aaa70’,‘marine-parts’:’#60b0e8’,‘non-marine’:’#c87840’,other:’#9870c0’};
+
+function sv()  { localStorage.setItem(‘pt’, JSON.stringify(items)); }
+function se()  { localStorage.setItem(‘pe’, JSON.stringify(evs)); }
+function fm(n) { return ‘$’+Number(n||0).toLocaleString(‘en-US’,{minimumFractionDigits:2,maximumFractionDigits:2}); }
+function emp(t,s) { return ‘<div class="empty"><div class="ei">🚤</div><div class="et">’+t+’</div><div class="es">’+s+’</div></div>’; }
+
+function showPage(id) {
+document.querySelectorAll(’.pg’).forEach(function(p){p.classList.remove(‘on’);});
+document.querySelectorAll(’.tab’).forEach(function(b){b.classList.remove(‘on’);});
+document.getElementById(id).classList.add(‘on’);
+var tabs=[‘dash’,‘inv’,‘sold’,‘calc’,‘cal’];
+var i=tabs.indexOf(id); if(i>=0) document.querySelectorAll(’.tab’)[i].classList.add(‘on’);
+if(id===‘dash’)      rDash();
+else if(id===‘inv’)  rInv();
+else if(id===‘sold’) rSold();
+else if(id===‘calc’) rSum();
+else if(id===‘cal’)  { rCal(); rEvList(); }
+}
+
+function rDash() {
+var act=items.filter(function(i){return i.status!==‘sold’;}),sol=items.filter(function(i){return i.status===‘sold’;});
+var aI=act.reduce(function(s,i){return s+(parseFloat(i.b)||0)+(parseFloat(i.rp)||0);},0);
+var rev=sol.reduce(function(s,i){return s+(parseFloat(i.sp)||0);},0);
+var cst=sol.reduce(function(s,i){return s+(parseFloat(i.b)||0)+(parseFloat(i.rp)||0);},0);
+var prf=rev-cst;
+document.getElementById(‘scards’).innerHTML=
+‘<div class="sc"><div class="slbl">In Stock</div><div class="sval">’+act.length+’</div><div class="ssub">’+items.length+’ total</div></div>’+
+‘<div class="sc r"><div class="slbl">Capital Tied Up</div><div class="sval r">’+fm(aI)+’</div><div class="ssub">’+act.length+’ active</div></div>’+
+‘<div class="sc g"><div class="slbl">Total Profit</div><div class="sval g">’+fm(prf)+’</div><div class="ssub">’+sol.length+’ sold</div></div>’+
+‘<div class="sc b"><div class="slbl">Revenue</div><div class="sval b">’+fm(rev)+’</div><div class="ssub">all time</div></div>’;
+var cp={},mx=0;
+Object.keys(CATS).forEach(function(c){
+var p=sol.filter(function(i){return i.c===c;}).reduce(function(s,i){return s+(parseFloat(i.sp)||0)-(parseFloat(i.b)||0)-(parseFloat(i.rp)||0);},0);
+cp[c]=p; if(Math.abs(p)>mx) mx=Math.abs(p);
+});
+document.getElementById(‘cchart’).innerHTML=Object.keys(CATS).map(function(c){
+var p=cp[c]||0,pct=mx>0?(Math.abs(p)/mx*100):0,col=p>=0?CC[c]:’#c84848’;
+return ‘<div class="cbrow"><div class="cblbl">’+CATS[c]+’</div><div class="cbtrk"><div class="cbfil" style="width:'+pct+'%;background:'+col+'"></div></div><div class="cbval" style="color:'+col+'">’+fm(p)+’</div></div>’;
+}).join(’’);
+var rec=items.slice().sort(function(a,b){return(b.dt||’’).localeCompare(a.dt||’’);}).slice(0,5);
+document.getElementById(‘recent’).innerHTML=rec.length?rec.map(function(i){return icard(i);}).join(’’):emp(‘No Items Yet’,‘Add your first item in Inventory’);
+}
+
+function rInv() {
+var q=(document.getElementById(‘sinv’).value||’’).toLowerCase();
+var cat=document.getElementById(‘fcat’).value;
+var f=items.filter(function(i){return i.status!==‘sold’;});
+if(cat) f=f.filter(function(i){return i.c===cat;});
+if(q)   f=f.filter(function(i){return(i.n||’’).toLowerCase().indexOf(q)>=0||(i.mo||’’).toLowerCase().indexOf(q)>=0||(i.no||’’).toLowerCase().indexOf(q)>=0;});
+document.getElementById(‘ilist’).innerHTML=f.length?f.map(function(i){return icard(i,true);}).join(’’):emp(‘Nothing Here’,‘Add items or adjust the filter’);
+}
+
+function rSold() {
+var sol=items.filter(function(i){return i.status===‘sold’;});
+document.getElementById(‘slist’).innerHTML=sol.length?sol.map(function(i){return icard(i,true);}).join(’’):emp(‘No Sold Items Yet’,‘Mark items as sold when you flip them!’);
+}
+
+function icard(item,ed) {
+var inv=(parseFloat(item.b)||0)+(parseFloat(item.rp)||0), sell=parseFloat(item.sp)||0, profit=sell-inv;
+var roi=inv>0?((profit/inv)*100).toFixed(0):0, isSold=item.status===‘sold’;
+var badge=isSold?’<div class="pbadge '+(profit<0?'l':'')+'">’+(profit>=0?’+’:’’)+fm(profit)+’</div>’:’<div class="pbadge p">IN STOCK</div>’;
+var fin=isSold
+?’<div class="ifin"><div class="fi">Paid: <span>’+fm(item.b)+’</span></div>’+(item.rp>0?’<div class="fi">Costs: <span>’+fm(item.rp)+’</span></div>’:’’)+
+‘<div class="fi">Invested: <span>’+fm(inv)+’</span></div><div class="fi">Sold: <span>’+fm(sell)+’</span></div>’+
+‘<div class="fi">ROI: <span class="'+(profit>=0?'fp':'fl')+'">’+roi+’%</span></div></div>’
+:’<div class="ifin"><div class="fi">Paid: <span>’+fm(item.b)+’</span></div>’+(item.rp>0?’<div class="fi">Costs: <span>’+fm(item.rp)+’</span></div>’:’’)+
+‘<div class="fi">Invested: <span>’+fm(inv)+’</span></div>’+(item.sp>0?’<div class="fi">Asking: <span>’+fm(sell)+’</span></div>’:’’)+
+‘</div>’;
+var acts=ed
+?’<div class="iact">’+badge+
+‘<div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end">’+
+‘<button class="btn btnp btnsm" onclick="openEdit(\''+item.id+'\')">Edit</button>’+
+‘<button class="btn btnd btnsm" onclick="delItem(\''+item.id+'\')">Del</button>’+
+(!isSold?’<button class="btn btns btnsm" onclick="mkSold(\''+item.id+'\')">Sold</button>’:’’)+
+‘</div></div>’
+:’<div class="iact">’+badge+’</div>’;
+return ‘<div class="icard '+(isSold?'sold':'')+'"><div>’+
+‘<div class="iname">’+item.n+’</div>’+
+‘<div class="imeta"><span class="tag">’+(CATS[item.c]||item.c)+’</span>’+
+‘<span class="tag '+(isSold?'ts':'ta')+'">’+(isSold?‘Sold’:‘Active’)+’</span>’+
+(item.dt?’<span class="tag">’+item.dt+’</span>’:’’)+
+‘</div>’+(item.mo?’<div class="inote">’+item.mo+’</div>’:’’)+
+fin+(item.no?’<div class="inote">’+item.no+’</div>’:’’)+
+‘</div>’+acts+’</div>’;
+}
+
+function openAdd() {
+eid=null; document.getElementById(‘mtitle’).textContent=‘ADD ITEM’;
+document.getElementById(‘fn’).value=’’; document.getElementById(‘fc’).value=‘boat’;
+document.getElementById(‘fb’).value=’’; document.getElementById(‘frp’).value=’’;
+document.getElementById(‘fsp’).value=’’; document.getElementById(‘fst’).value=‘active’;
+document.getElementById(‘fmo’).value=’’; document.getElementById(‘fno’).value=’’;
+document.getElementById(‘fdt’).value=new Date().toISOString().split(‘T’)[0];
+document.getElementById(‘imo’).classList.add(‘on’);
+}
+function openEdit(id) {
+eid=id; var item=items.find(function(i){return i.id===id;}); if(!item) return;
+document.getElementById(‘mtitle’).textContent=‘EDIT ITEM’;
+document.getElementById(‘fn’).value=item.n||’’; document.getElementById(‘fc’).value=item.c||‘boat’;
+document.getElementById(‘fb’).value=item.b||’’; document.getElementById(‘frp’).value=item.rp||’’;
+document.getElementById(‘fsp’).value=item.sp||’’; document.getElementById(‘fst’).value=item.status||‘active’;
+document.getElementById(‘fmo’).value=item.mo||’’; document.getElementById(‘fno’).value=item.no||’’;
+document.getElementById(‘fdt’).value=item.dt||’’;
+document.getElementById(‘imo’).classList.add(‘on’);
+}
+function closeM() { document.getElementById(‘imo’).classList.remove(‘on’); }
+function saveItem() {
+var n=document.getElementById(‘fn’).value.trim(), b=parseFloat(document.getElementById(‘fb’).value)||0;
+if(!n){alert(‘Name required!’);return;} if(!b){alert(‘Purchase price required!’);return;}
+var item={id:eid||Date.now().toString(),n:n,c:document.getElementById(‘fc’).value,b:b,
+rp:parseFloat(document.getElementById(‘frp’).value)||0,
+sp:parseFloat(document.getElementById(‘fsp’).value)||0,
+status:document.getElementById(‘fst’).value,
+mo:document.getElementById(‘fmo’).value.trim(),
+no:document.getElementById(‘fno’).value.trim(),
+dt:document.getElementById(‘fdt’).value};
+if(eid){items[items.findIndex(function(i){return i.id===eid;})]=item;} else{items.unshift(item);}
+sv(); closeM(); rInv(); rDash();
+}
+function delItem(id) {
+if(!confirm(‘Delete this item?’)) return;
+items=items.filter(function(i){return i.id!==id;});
+sv(); rInv(); rSold(); rDash();
+}
+function mkSold(id) {
+var item=items.find(function(i){return i.id===id;}); if(!item) return;
+var p=prompt(‘Sale price for “’+item.n+’”:’,item.sp||’’); if(p===null) return;
+item.sp=parseFloat(p)||0; item.status=‘sold’;
+sv(); rInv(); rDash();
+}
+
+function doCalc() {
+var b=parseFloat(document.getElementById(‘cbuy’).value)||0;
+var r=parseFloat(document.getElementById(‘crep’).value)||0;
+var s=parseFloat(document.getElementById(‘csel’).value)||0;
+var inv=b+r, profit=s-inv, roi=inv>0?((profit/inv)*100).toFixed(1):0;
+document.getElementById(‘cli’).textContent=fm(inv);
+document.getElementById(‘cls’).textContent=fm(s);
+document.getElementById(‘clp’).textContent=fm(profit);
+document.getElementById(‘clr’).textContent=roi+’%’;
+var el=document.getElementById(‘cbig’); el.textContent=fm(profit); el.className=‘crval’+(profit<0?’ neg’:’’);
+}
+
+function rSum() {
+var sol=items.filter(function(i){return i.status===‘sold’;});
+var rev=sol.reduce(function(s,i){return s+(parseFloat(i.sp)||0);},0);
+var cst=sol.reduce(function(s,i){return s+(parseFloat(i.b)||0)+(parseFloat(i.rp)||0);},0);
+var prf=rev-cst, avg=sol.length?prf/sol.length:0;
+var best=sol.reduce(function(bst,i){var p=(parseFloat(i.sp)||0)-(parseFloat(i.b)||0)-(parseFloat(i.rp)||0);return p>bst.p?{n:i.n,p:p}:bst;},{n:‘None yet’,p:0});
+var inStk=items.filter(function(i){return i.status!==‘sold’;});
+var inCap=inStk.reduce(function(s,i){return s+(parseFloat(i.b)||0)+(parseFloat(i.rp)||0);},0);
+document.getElementById(‘sumcard’).innerHTML=
+‘<div class="cline">Total Sold <span>’+sol.length+’</span></div>’+
+‘<div class="cline">Total Revenue <span>’+fm(rev)+’</span></div>’+
+‘<div class="cline">Total Invested (sold) <span>’+fm(cst)+’</span></div>’+
+‘<div class="cline">Total Profit <span style="color:'+(prf>=0?'#4aaa70':'#c84848')+'">’+fm(prf)+’</span></div>’+
+‘<div class="cline">Avg Profit / Item <span>’+fm(avg)+’</span></div>’+
+‘<div class="cline">Best Flip <span style="color:#e0bc60">’+best.n+’ (+’+fm(best.p)+’)</span></div>’+
+‘<div class="cline">Items In Stock <span>’+inStk.length+’</span></div>’+
+‘<div class="cline">Capital In Stock <span style="color:#c84848">’+fm(inCap)+’</span></div>’;
+}
+
+var MO=[‘January’,‘February’,‘March’,‘April’,‘May’,‘June’,‘July’,‘August’,‘September’,‘October’,‘November’,‘December’];
+function rCal() {
+document.getElementById(‘calml’).textContent=MO[cm]+’ ‘+cy;
+var first=new Date(cy,cm,1).getDay(), dim=new Date(cy,cm+1,0).getDate(), prev=new Date(cy,cm,0).getDate();
+var today=new Date().toISOString().split(‘T’)[0], html=’’;
+for(var i=first-1;i>=0;i–) html+=’<div class="cday om"><div class="cdn">’+(prev-i)+’</div></div>’;
+for(var d=1;d<=dim;d++){
+var ds=cy+’-’+String(cm+1).padStart(2,‘0’)+’-’+String(d).padStart(2,‘0’);
+var de=evs.filter(function(e){return e.d===ds;});
+html+=’<div class="cday'+(ds===today?' td':'')+(de.length?' he':'')+'" onclick="selDay(\''+ds+'\')">’;
+html+=’<div class="cdn">’+d+’</div>’;
+html+=de.slice(0,3).map(function(e){return’<div class="cdot '+e.ty+'">’+e.ti+’</div>’;}).join(’’);
+html+=’</div>’;
+}
+var rem=(7-(first+dim)%7)%7;
+for(var d2=1;d2<=rem;d2++) html+=’<div class="cday om"><div class="cdn">’+d2+’</div></div>’;
+document.getElementById(‘ccells’).innerHTML=html;
+}
+function calPrev(){cm–;if(cm<0){cm=11;cy–;}rCal();}
+function calNext(){cm++;if(cm>11){cm=0;cy++;}rCal();}
+function selDay(ds){openEv(ds);}
+
+function rEvList(fd) {
+var today=new Date().toISOString().split(‘T’)[0];
+var filt=fd?evs.filter(function(e){return e.d===fd;}):evs.filter(function(e){return e.d>=today;}).sort(function(a,b){return a.d.localeCompare(b.d);});
+document.getElementById(‘evlbl’).textContent=fd?‘Events on ‘+fd:‘Upcoming Events’;
+var TL={buy:‘Buying Trip’,sell:‘Sale’,appointment:‘Appointment’,reminder:‘Reminder’};
+var cls={buy:‘eb’,sell:‘es2’,appointment:‘ea’,reminder:‘er’};
+if(!filt.length){document.getElementById(‘evlist’).innerHTML=emp(fd?‘No Events’:‘No Upcoming Events’,‘Tap + Add Event to schedule something’);return;}
+document.getElementById(‘evlist’).innerHTML=filt.map(function(ev){
+return ‘<div class="eitem '+(cls[ev.ty]||'')+'">’+
+‘<div style="flex:1"><div class="etitle">’+ev.ti+’</div>’+
+‘<div class="emeta">’+
+‘<span class="ebadge '+ev.ty+'">’+(TL[ev.ty]||ev.ty)+’</span>’+
+‘<span>’+ev.d+’</span>’+
+(ev.tm?’<span>’+ev.tm+’</span>’:’’)+
+(ev.no?’<span>’+ev.no+’</span>’:’’)+
+(ev.al!==undefined&&ev.al!==’’?’<span style="color:#c9a84c">🔔 Alarm set</span>’:’’)+
+‘</div></div>’+
+‘<div style="display:flex;gap:6px;flex-shrink:0">’+
+‘<button class="btn btnp btnsm" onclick="openEditEv(\''+ev.id+'\')">Edit</button>’+
+‘<button class="btn btnd btnsm" onclick="delEv(\''+ev.id+'\')">Del</button>’+
+‘</div></div>’;
+}).join(’’);
+}
+
+function openEv(pre) {
+eeid=null; document.getElementById(‘emtitle’).textContent=‘ADD EVENT’;
+document.getElementById(‘eti’).value=’’; document.getElementById(‘ety’).value=‘appointment’;
+document.getElementById(‘edt’).value=pre||new Date().toISOString().split(‘T’)[0];
+document.getElementById(‘etm’).value=’’; document.getElementById(‘eal’).value=’’;
+document.getElementById(‘eno’).value=’’;
+document.getElementById(‘emo’).classList.add(‘on’);
+}
+function openEditEv(id) {
+eeid=id; var ev=evs.find(function(e){return e.id===id;}); if(!ev) return;
+document.getElementById(‘emtitle’).textContent=‘EDIT EVENT’;
+document.getElementById(‘eti’).value=ev.ti||’’; document.getElementById(‘ety’).value=ev.ty||‘appointment’;
+document.getElementById(‘edt’).value=ev.d||’’; document.getElementById(‘etm’).value=ev.tm||’’;
+document.getElementById(‘eal’).value=ev.al!==undefined?ev.al:’’; document.getElementById(‘eno’).value=ev.no||’’;
+document.getElementById(‘emo’).classList.add(‘on’);
+}
+function closeEM() { document.getElementById(‘emo’).classList.remove(‘on’); }
+function saveEv() {
+var title=document.getElementById(‘eti’).value.trim(), date=document.getElementById(‘edt’).value;
+if(!title){alert(‘Title required!’);return;} if(!date){alert(‘Date required!’);return;}
+var ev={id:eeid||Date.now().toString(),ti:title,ty:document.getElementById(‘ety’).value,
+d:date,tm:document.getElementById(‘etm’).value,al:document.getElementById(‘eal’).value,
+no:document.getElementById(‘eno’).value.trim()};
+if(eeid){evs[evs.findIndex(function(e){return e.id===eeid;})]=ev;} else{evs.push(ev);}
+se(); schedAlarm(ev); closeEM(); rCal(); rEvList();
+toast(‘Event Saved’,’”’+ev.ti+’” added to calendar.’,false);
+}
+function delEv(id) {
+if(!confirm(‘Delete this event?’)) return;
+evs=evs.filter(function(e){return e.id!==id;});
+se(); rCal(); rEvList();
+}
+
+var alarms={};
+function schedAlarm(ev) {
+if(ev.al===’’||ev.al===undefined||!ev.tm) return;
+var ms=new Date(ev.d+‘T’+ev.tm).getTime()-(parseInt(ev.al)*60000);
+var delay=ms-Date.now(); if(delay<0) return;
+if(alarms[ev.id]) clearTimeout(alarms[ev.id]);
+alarms[ev.id]=setTimeout(function(){
+var mins=parseInt(ev.al);
+var msg=’”’+ev.ti+’”’+(mins===0?’ is starting now!’:(mins>=60?’ is in ‘+(mins/60)+’ hour’:’ is in ‘+mins+’ min’));
+toast(‘ALARM’,msg,true);
+try{if(‘Notification’ in window&&Notification.permission===‘granted’)new Notification(“Capt. Pete’s Treasures”,{body:ev.ti+(ev.no?’ - ‘+ev.no:’’)});}catch(e){}
+},delay);
+}
+function toast(title,msg,isAlarm) {
+var tc=document.getElementById(‘tc’),t=document.createElement(‘div’);
+t.className=‘toast’+(isAlarm?’ alarm’:’’);
+t.innerHTML=’<div class="ttitle">’+title+’</div><div>’+msg+’</div>’;
+tc.appendChild(t);
+setTimeout(function(){t.style.animation=‘tout .4s ease forwards’;setTimeout(function(){t.remove();},400);},isAlarm?8000:3500);
+}
+
+document.getElementById(‘imo’).addEventListener(‘click’,function(e){if(e.target===this)closeM();});
+document.getElementById(‘emo’).addEventListener(‘click’,function(e){if(e.target===this)closeEM();});
+if(‘Notification’ in window&&Notification.permission===‘default’) Notification.requestPermission();
+evs.forEach(function(ev){schedAlarm(ev);});
+rDash();
+
+</script>
+</body>
+</html>

@@ -4,28 +4,23 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Capt. Pete's Treasures</title>
-<link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAYAAABS3GwHAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEwAACxMBAJqcGAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAMCSURBVHic7dAxAQAAAMKg9U9tCy+gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAeAMBuAABHgAAAABJRU5ErkJggg==">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Pete Inventory">
+<title>Capt. Pete's Treasures</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Source+Serif+4:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-html{background:#0a1628}
-body{font-family:'Source Serif 4',Georgia,serif;background:#0a1628;min-height:100vh;color:#d4c070;overflow-x:hidden}
+html,body{background:#0a1628;color:#d4c070;font-family:'Source Serif 4',Georgia,serif;min-height:100vh;overflow-x:hidden}
 header{background:linear-gradient(180deg,#050d1a,#0a1628);border-bottom:2px solid #c9a84c;padding:0 20px;position:sticky;top:0;z-index:100;box-shadow:0 4px 30px rgba(0,0,0,.9)}
 .hdr{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:74px}
-.logo{display:flex;align-items:center;gap:14px;cursor:pointer}
-.logo-name{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:4px;color:#f0d070;text-shadow:0 0 20px rgba(201,168,76,.5);display:block}
-.logo-sub{font-family:'Bebas Neue',sans-serif;font-size:12px;letter-spacing:5px;color:#a88030;display:block;margin-top:3px}
-.tagline{font-family:'Bebas Neue',sans-serif;font-size:13px;color:#a88030;letter-spacing:3px;display:none}
+.logo-name{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:4px;color:#f0d070;display:block}
+.logo-sub{font-family:'Bebas Neue',sans-serif;font-size:12px;letter-spacing:5px;color:#a08030;display:block;margin-top:3px}
+.tagline{font-family:'Bebas Neue',sans-serif;font-size:13px;color:#a08030;letter-spacing:3px;display:none}
 @media(min-width:520px){.tagline{display:block}}
 nav{background:#071020;border-bottom:1px solid #2a4a7a;display:flex;overflow-x:auto;scrollbar-width:none;position:sticky;top:74px;z-index:99}
 nav::-webkit-scrollbar{display:none}
-.tab{padding:14px 22px;font-family:'Bebas Neue',sans-serif;font-size:15px;letter-spacing:2px;color:#6090b0;background:none;border:none;border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap;transition:all .2s;-webkit-tap-highlight-color:transparent}
-.tab:hover,.tab:focus{color:#c9a84c;background:rgba(201,168,76,.06);outline:none}
-.tab.on{color:#f0d070;border-bottom-color:#c9a84c;background:rgba(201,168,76,.08)}
+.tab{padding:14px 18px;font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:2px;color:#6090b0;background:none;border:none;border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap;transition:all .2s;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.tab:hover,.tab.on{color:#f0d070;border-bottom-color:#c9a84c;background:rgba(201,168,76,.08)}
 .pg{display:none;padding:22px 16px;max-width:1100px;margin:0 auto}
 .pg.on{display:block}
 .grid4{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:22px}
@@ -34,58 +29,57 @@ nav::-webkit-scrollbar{display:none}
 .sc::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--a,#c9a84c)}
 .sc.g{--a:#4aaa70}.sc.r{--a:#e05050}.sc.b{--a:#5090e0}
 .slbl{font-family:'Bebas Neue',sans-serif;font-size:11px;letter-spacing:2.5px;color:#8099b8;text-transform:uppercase;margin-bottom:8px}
-.sval{font-family:'Bebas Neue',sans-serif;font-size:30px;letter-spacing:1px;color:#f0d070;line-height:1}
+.sval{font-family:'Bebas Neue',sans-serif;font-size:30px;color:#f0d070;line-height:1}
 .sval.g{color:#4aaa70}.sval.r{color:#e05050}.sval.b{color:#5090e0}
 .ssub{font-size:11px;color:#6080a0;margin-top:5px;font-family:'JetBrains Mono',monospace}
 .stitle{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:4px;color:#c9a84c;margin-bottom:12px;margin-top:24px;border-bottom:1px solid #2a4a7a;padding-bottom:8px}
 .card{background:#122040;border:1px solid #2a4a7a;border-radius:10px;padding:20px;margin-bottom:14px}
 .cbrow{display:flex;align-items:center;gap:10px;margin-bottom:12px}
-.cblbl{font-family:'Bebas Neue',sans-serif;font-size:12px;letter-spacing:1.5px;color:#d4c070;width:120px;text-transform:uppercase;flex-shrink:0}
+.cblbl{font-family:'Bebas Neue',sans-serif;font-size:12px;color:#d4c070;width:120px;flex-shrink:0;text-transform:uppercase}
 .cbtrk{flex:1;height:7px;background:rgba(255,255,255,.06);border-radius:4px;overflow:hidden}
 .cbfil{height:100%;border-radius:4px;transition:width .5s}
 .cbval{font-family:'JetBrains Mono',monospace;font-size:12px;color:#c9a84c;width:72px;text-align:right}
-.btn{padding:10px 20px;border-radius:7px;border:none;font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:2px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;white-space:nowrap;transition:all .2s;-webkit-tap-highlight-color:transparent}
-.btnp{background:#c9a84c;color:#050e1a}.btnp:hover,.btnp:active{background:#e0c060;transform:translateY(-1px)}
-.btns{background:#2a7a48;color:#e0ffe0;border:1px solid #4aaa70}.btns:hover,.btns:active{background:#4aaa70}
-.btnd{background:rgba(200,60,60,.18);color:#f07070;border:1px solid rgba(200,60,60,.35)}.btnd:hover,.btnd:active{background:rgba(200,60,60,.3)}
+.btn{padding:10px 20px;border-radius:7px;border:none;font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:2px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;white-space:nowrap;transition:all .2s;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.btnp{background:#c9a84c;color:#050e1a}.btnp:active{background:#e0c060}
+.btns{background:#2a7a48;color:#e0ffe0;border:1px solid #4aaa70}.btns:active{background:#4aaa70}
+.btnd{background:rgba(200,60,60,.18);color:#f07070;border:1px solid rgba(200,60,60,.35)}.btnd:active{background:rgba(200,60,60,.3)}
 .btnsm{padding:6px 12px;font-size:12px}
 .ictrl{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
-.ictrl select,.ictrl input{background:#0e1c38;border:1px solid #2a4a7a;border-radius:7px;padding:10px 14px;color:#f0d070;font-family:'Source Serif 4',serif;font-size:14px;outline:none;flex:1;min-width:140px;transition:border-color .2s}
-.ictrl select:focus,.ictrl input:focus{border-color:#c9a84c}
-.ictrl select option{background:#0e1c38;color:#f0d070}
+.ictrl select,.ictrl input{background:#0e1c38;border:1px solid #2a4a7a;border-radius:7px;padding:10px 14px;color:#f0d070;font-family:'Source Serif 4',serif;font-size:14px;outline:none;flex:1;min-width:140px}
+.ictrl select option{background:#0e1c38}
 .ilist{display:flex;flex-direction:column;gap:10px}
-.icard{background:#122040;border:1px solid #2a4a7a;border-left:4px solid #a08030;border-radius:8px;padding:16px;display:grid;grid-template-columns:1fr auto;gap:12px;transition:border-color .2s,transform .15s;animation:si .3s}
+.icard{background:#122040;border:1px solid #2a4a7a;border-left:4px solid #a08030;border-radius:8px;padding:16px;display:grid;grid-template-columns:1fr auto;gap:12px;animation:si .3s}
 @keyframes si{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-.icard:hover{border-color:#c9a84c;transform:translateY(-1px)}
 .icard.sold{opacity:.6;border-left-color:#4aaa70}
 .iname{font-family:'Bebas Neue',sans-serif;font-size:19px;letter-spacing:2px;color:#f0d070;margin-bottom:5px}
 .imeta{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:8px}
-.tag{font-family:'Bebas Neue',sans-serif;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;padding:3px 9px;border-radius:4px;background:rgba(201,168,76,.12);color:#d4b050;border:1px solid rgba(201,168,76,.25)}
+.tag{font-family:'Bebas Neue',sans-serif;font-size:10px;letter-spacing:1.5px;padding:3px 9px;border-radius:4px;background:rgba(201,168,76,.12);color:#d4b050;border:1px solid rgba(201,168,76,.25)}
 .tag.ts{background:rgba(74,170,112,.14);color:#5acc80;border-color:rgba(74,170,112,.28)}
 .tag.ta{background:rgba(80,144,224,.14);color:#70a8f0;border-color:rgba(80,144,224,.28)}
 .ifin{display:flex;gap:14px;flex-wrap:wrap;margin-top:4px}
 .fi{font-size:12px;color:#6080a0;font-family:'JetBrains Mono',monospace}
 .fi span{color:#c0a850;font-weight:600}
-.fp{color:#4aaa70;font-weight:700}.fl{color:#e05050;font-weight:700}
+.fp{color:#4aaa70;font-weight:700}.fl2b{color:#e05050;font-weight:700}
 .iact{display:flex;flex-direction:column;gap:6px;align-items:flex-end;justify-content:space-between}
-.pbadge{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:1px;padding:5px 12px;border-radius:6px;white-space:nowrap;background:rgba(74,170,112,.12);color:#5acc80;border:1px solid rgba(74,170,112,.28)}
+.pbadge{font-family:'Bebas Neue',sans-serif;font-size:18px;padding:5px 12px;border-radius:6px;white-space:nowrap;background:rgba(74,170,112,.12);color:#5acc80;border:1px solid rgba(74,170,112,.28)}
 .pbadge.l{background:rgba(200,60,60,.12);color:#f07070;border-color:rgba(200,60,60,.28)}
 .pbadge.p{background:rgba(80,144,224,.12);color:#70a8f0;border-color:rgba(80,144,224,.28);font-size:12px;padding:6px 12px;letter-spacing:2px}
 .inote{font-size:12px;color:#6080a0;margin-top:5px;font-style:italic}
 .mo{display:none;position:fixed;inset:0;background:rgba(2,5,14,.96);z-index:200;padding:20px;overflow-y:auto;backdrop-filter:blur(8px)}
-.mo.on{display:flex;align-items:flex-start;justify-content:center;padding-top:36px}
+.mo.on{display:flex;align-items:flex-start;justify-content:center;padding-top:30px}
 .mbox{background:linear-gradient(160deg,#0c1830,#112040);border:1px solid #a08030;border-top:2px solid #c9a84c;border-radius:12px;padding:26px 22px;width:100%;max-width:540px;box-shadow:0 20px 80px rgba(0,0,0,.97);animation:mi .3s}
-@keyframes mi{from{opacity:0;transform:scale(.95) translateY(-8px)}to{opacity:1;transform:scale(1) translateY(0)}}
+@keyframes mi{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}
 .mtitle{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:4px;color:#f0d070;margin-bottom:18px;padding-bottom:10px;border-bottom:1px solid #2a4a7a}
 .fg{margin-bottom:13px}
-.fl2{display:block;font-family:'Bebas Neue',sans-serif;font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:#a08030;margin-bottom:6px}
-.fi2{width:100%;background:#0a1828;border:1px solid #2a4a7a;border-radius:7px;padding:11px 14px;color:#f0d070;font-family:'Source Serif 4',serif;font-size:14px;outline:none;transition:border-color .2s,box-shadow .2s}
-.fi2:focus{border-color:#c9a84c;box-shadow:0 0 0 3px rgba(201,168,76,.12)}
+.fl2{display:block;font-family:'Bebas Neue',sans-serif;font-size:11px;letter-spacing:2.5px;color:#a08030;margin-bottom:6px}
+.fi2{width:100%;background:#0a1828;border:1px solid #2a4a7a;border-radius:7px;padding:11px 14px;color:#f0d070;font-family:'Source Serif 4',serif;font-size:14px;outline:none;transition:border-color .2s}
+.fi2:focus{border-color:#c9a84c}
 .fi2 option{background:#0c1830;color:#f0d070}
+textarea.fi2{resize:vertical;min-height:90px}
 .frow{display:grid;grid-template-columns:1fr 1fr;gap:11px}
 .mact{display:flex;gap:10px;justify-content:flex-end;margin-top:18px;flex-wrap:wrap}
 .crbox{background:rgba(74,170,112,.08);border:1px solid rgba(74,170,112,.22);border-radius:8px;padding:18px;text-align:center;margin-top:14px}
-.crlbl{font-family:'Bebas Neue',sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#6080a0;margin-bottom:6px}
+.crlbl{font-family:'Bebas Neue',sans-serif;font-size:11px;letter-spacing:3px;color:#6080a0;margin-bottom:6px}
 .crval{font-family:'Bebas Neue',sans-serif;font-size:48px;color:#4aaa70;letter-spacing:2px}
 .crval.neg{color:#e05050}
 .crow{display:grid;grid-template-columns:1fr 1fr 1fr;gap:11px;margin-bottom:11px}
@@ -93,16 +87,17 @@ nav::-webkit-scrollbar{display:none}
 .cline span{color:#d4c070;font-weight:600}
 .empty{text-align:center;padding:50px 20px;color:#6080a0}
 .ei{font-size:44px;margin-bottom:12px}
-.et{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:3px;color:#c9a84c;margin-bottom:6px}
-.es{font-size:13px;color:#6080a0}
+.et2{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:3px;color:#c9a84c;margin-bottom:6px}
+.es2{font-size:13px;color:#6080a0}
+/* CALENDAR */
 .cal-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
 .cal-ml{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:4px;color:#f0d070}
-.cnav{background:#0e1c38;border:1px solid #2a4a7a;border-radius:7px;color:#c9a84c;font-size:22px;width:40px;height:40px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s}
-.cnav:hover,.cnav:active{background:#162840;color:#f0d070}
+.cnav{background:#0e1c38;border:1px solid #2a4a7a;border-radius:7px;color:#c9a84c;font-size:22px;width:40px;height:40px;cursor:pointer;display:flex;align-items:center;justify-content:center;touch-action:manipulation}
+.cnav:active{background:#162840}
 .cgrid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px}
-.cdow{text-align:center;font-family:'Bebas Neue',sans-serif;font-size:11px;letter-spacing:2px;color:#a08030;padding:6px 0;text-transform:uppercase}
-.cday{background:#122040;border:1px solid #2a4a7a;border-radius:6px;min-height:72px;padding:6px;cursor:pointer;transition:border-color .2s,background .2s;position:relative}
-.cday:hover,.cday:active{border-color:#a08030;background:#162a50}
+.cdow{text-align:center;font-family:'Bebas Neue',sans-serif;font-size:11px;letter-spacing:2px;color:#a08030;padding:6px 0}
+.cday{background:#122040;border:1px solid #2a4a7a;border-radius:6px;min-height:72px;padding:6px;cursor:pointer;position:relative;touch-action:manipulation}
+.cday:active{background:#162a50}
 .cday.td{border-color:#c9a84c !important;background:rgba(201,168,76,.08) !important}
 .cday.om{opacity:.12;pointer-events:none}
 .cday.he{border-color:rgba(201,168,76,.4)}
@@ -114,53 +109,53 @@ nav::-webkit-scrollbar{display:none}
 .cdot.appointment{background:rgba(80,144,224,.18);color:#70a8f0;border-left:2px solid #5090e0}
 .cdot.reminder{background:rgba(220,70,70,.18);color:#f07070;border-left:2px solid #e05050}
 .elist{display:flex;flex-direction:column;gap:8px}
-.eitem{background:#122040;border:1px solid #2a4a7a;border-left:4px solid #a08030;border-radius:8px;padding:13px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px;animation:si .3s;transition:border-color .2s}
-.eitem:hover{border-color:#c9a84c}
-.eitem.eb{border-left-color:#c9a84c}.eitem.es2{border-left-color:#4aaa70}.eitem.ea{border-left-color:#5090e0}.eitem.er{border-left-color:#e05050}
-.etitle{font-family:'Bebas Neue',sans-serif;font-size:17px;letter-spacing:2px;color:#f0d070;margin-bottom:4px}
+.eitem{background:#122040;border:1px solid #2a4a7a;border-left:4px solid #a08030;border-radius:8px;padding:13px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px;animation:si .3s}
+.eitem.eb{border-left-color:#c9a84c}.eitem.es3{border-left-color:#4aaa70}.eitem.ea{border-left-color:#5090e0}.eitem.er{border-left-color:#e05050}
+.etitle2{font-family:'Bebas Neue',sans-serif;font-size:17px;letter-spacing:2px;color:#f0d070;margin-bottom:4px}
 .emeta{font-size:12px;color:#6080a0;display:flex;gap:10px;flex-wrap:wrap;font-family:'JetBrains Mono',monospace}
 .emeta span{color:#c0a850}
-.ebadge{font-family:'Bebas Neue',sans-serif;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;padding:2px 8px;border-radius:3px}
+.ebadge{font-family:'Bebas Neue',sans-serif;font-size:10px;letter-spacing:1.5px;padding:2px 8px;border-radius:3px}
 .ebadge.buy{background:rgba(201,168,76,.15);color:#d4b050}.ebadge.sell{background:rgba(74,170,112,.15);color:#5acc80}.ebadge.appointment{background:rgba(80,144,224,.15);color:#70a8f0}.ebadge.reminder{background:rgba(220,70,70,.15);color:#f07070}
+/* LISTINGS */
+.lcard{background:#122040;border:1px solid #2a4a7a;border-left:4px solid #5090e0;border-radius:10px;overflow:hidden;animation:si .3s;margin-bottom:12px}
+.lcard-photos{display:flex;gap:6px;overflow-x:auto;padding:12px 12px 0;scrollbar-width:none}
+.lcard-photos::-webkit-scrollbar{display:none}
+.lcard-photos img{width:130px;height:100px;object-fit:cover;border-radius:6px;flex-shrink:0;border:1px solid #2a4a7a;cursor:pointer;touch-action:manipulation}
+.lcard-body{padding:14px}
+.lcard-title{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;color:#f0d070;margin-bottom:4px}
+.lcard-price{font-family:'Bebas Neue',sans-serif;font-size:26px;color:#4aaa70;letter-spacing:1px;margin-bottom:8px}
+.lcard-desc{font-size:13px;color:#b0c0d8;line-height:1.6;margin-bottom:10px;white-space:pre-wrap}
+.lcard-meta{font-family:'JetBrains Mono',monospace;font-size:11px;color:#6080a0;margin-bottom:12px}
+.lcard-actions{display:flex;gap:8px;flex-wrap:wrap}
+.photo-thumb-wrap{position:relative;display:inline-block}
+.photo-thumb-wrap .rm-photo{position:absolute;top:-6px;right:-6px;background:#e05050;color:#fff;border:none;border-radius:50%;width:20px;height:20px;font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-weight:bold;touch-action:manipulation}
+/* TOAST */
 .tc{position:fixed;bottom:24px;right:20px;z-index:999;display:flex;flex-direction:column;gap:10px}
 .toast{background:#0a1828;border:1px solid #2a4a7a;border-top:2px solid #c9a84c;border-radius:10px;padding:13px 17px;max-width:310px;animation:tin .4s;box-shadow:0 8px 32px rgba(0,0,0,.95);font-size:13px;color:#d4c070;font-family:'Source Serif 4',serif}
 .toast.alarm{border-top-color:#f0d070;background:#181200}
 .ttitle{font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:3px;color:#f0d070;margin-bottom:4px}
 @keyframes tin{from{opacity:0;transform:translateX(30px)}to{opacity:1;transform:translateX(0)}}
 @keyframes tout{from{opacity:1}to{opacity:0;transform:translateX(30px)}}
-::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:#2a4a7a;border-radius:3px}
-.fi2 textarea,.fi2[rows]{resize:vertical}
-textarea.fi2{resize:vertical;font-family:"Source Serif 4",serif}
-.lcard{background:#122040;border:1px solid #2a4a7a;border-left:4px solid #5090e0;border-radius:10px;overflow:hidden;animation:si .3s;transition:border-color .2s,transform .15s;margin-bottom:10px}
-.lcard:hover{border-color:#c9a84c;transform:translateY(-1px)}
-.lcard-photos{display:flex;gap:4px;overflow-x:auto;padding:12px 12px 0 12px;scrollbar-width:none}
-.lcard-photos::-webkit-scrollbar{display:none}
-.lcard-photos img{width:120px;height:90px;object-fit:cover;border-radius:6px;flex-shrink:0;border:1px solid #2a4a7a;cursor:pointer}
-.lcard-body{padding:14px}
-.lcard-title{font-family:"Bebas Neue",sans-serif;font-size:20px;letter-spacing:2px;color:#f0d070;margin-bottom:6px}
-.lcard-price{font-family:"Bebas Neue",sans-serif;font-size:24px;color:#4aaa70;letter-spacing:1px;margin-bottom:8px}
-.lcard-desc{font-size:13px;color:#b0c0d8;line-height:1.6;margin-bottom:10px;white-space:pre-wrap}
-.lcard-meta{font-family:"JetBrains Mono",monospace;font-size:11px;color:#6080a0;margin-bottom:10px}
-.lcard-actions{display:flex;gap:8px;flex-wrap:wrap}
-.copy-flash{animation:flash .6s ease}
-@keyframes flash{0%{background:#c9a84c;color:#050e1a}100%{background:#2a7a48;color:#e0ffe0}}
-.img-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.95);z-index:300;align-items:center;justify-content:center;cursor:pointer}
-.img-modal.on{display:flex}
-.img-modal img{max-width:95vw;max-height:90vh;object-fit:contain;border-radius:8px}
+/* IMG VIEWER */
+.imgview{display:none;position:fixed;inset:0;background:rgba(0,0,0,.96);z-index:300;align-items:center;justify-content:center;cursor:pointer}
+.imgview.on{display:flex}
+.imgview img{max-width:95vw;max-height:90vh;object-fit:contain;border-radius:8px}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-thumb{background:#2a4a7a;border-radius:3px}
 footer{text-align:center;padding:22px;font-family:'Bebas Neue',sans-serif;font-size:11px;letter-spacing:3px;color:#a08030;border-top:1px solid #2a4a7a;margin-top:40px}
-@media(max-width:500px){.crow{grid-template-columns:1fr 1fr}.frow{grid-template-columns:1fr}.icard{grid-template-columns:1fr}.iact{flex-direction:row;justify-content:space-between;align-items:center}.cday{min-height:54px;padding:4px}.cdot{display:none}.cday.he::after{content:'\25CF';position:absolute;bottom:3px;right:5px;color:#c9a84c;font-size:8px}}
+@media(max-width:500px){.crow{grid-template-columns:1fr 1fr}.frow{grid-template-columns:1fr}.icard{grid-template-columns:1fr}.iact{flex-direction:row;align-items:center}.cday{min-height:54px;padding:4px}.cdot{display:none}.cday.he::after{content:'\25CF';position:absolute;bottom:3px;right:5px;color:#c9a84c;font-size:8px}}
 </style>
 </head>
 <body>
 <header>
   <div class="hdr">
-    <div class="logo" data-page="dash">
-      <div><span class="logo-name">CAPT. PETE'S</span><span class="logo-sub">Treasures</span></div>
+    <div style="cursor:pointer" data-page="dash">
+      <span class="logo-name">CAPT. PETE'S</span>
+      <span class="logo-sub">Treasures</span>
     </div>
     <span class="tagline">BOATS &middot; MOTORS &middot; PARTS &middot; MORE</span>
   </div>
 </header>
-<nav>
+<nav id="mainnav">
   <button class="tab on" data-page="dash">&#128202; Dashboard</button>
   <button class="tab" data-page="inv">&#128676; Inventory</button>
   <button class="tab" data-page="sold">&#9989; Sold</button>
@@ -168,6 +163,8 @@ footer{text-align:center;padding:22px;font-family:'Bebas Neue',sans-serif;font-s
   <button class="tab" data-page="cal">&#128197; Calendar</button>
   <button class="tab" data-page="listings">&#128247; Listings</button>
 </nav>
+
+<!-- PAGES -->
 
 <div id="dash" class="pg on">
   <div class="grid4" id="scards"></div>
@@ -182,12 +179,9 @@ footer{text-align:center;padding:22px;font-family:'Bebas Neue',sans-serif;font-s
     <input type="text" id="sinv" placeholder="Search items...">
     <select id="fcat">
       <option value="">All Categories</option>
-      <option value="boat">Boats</option>
-      <option value="motor">Motors</option>
-      <option value="trailer">Trailers</option>
-      <option value="marine-parts">Marine Parts</option>
-      <option value="non-marine">Non-Marine</option>
-      <option value="other">Other</option>
+      <option value="boat">Boats</option><option value="motor">Motors</option>
+      <option value="trailer">Trailers</option><option value="marine-parts">Marine Parts</option>
+      <option value="non-marine">Non-Marine</option><option value="other">Other</option>
     </select>
     <button class="btn btnp" id="btnAdd">+ Add Item</button>
   </div>
@@ -240,43 +234,13 @@ footer{text-align:center;padding:22px;font-family:'Bebas Neue',sans-serif;font-s
 
 <div id="listings" class="pg">
   <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:16px">
-    <div class="stitle" style="margin:0;border:none;padding:0">For Sale Listings</div>
+    <div class="stitle" style="margin:0;border:none;padding:0">&#128247; For Sale Listings</div>
     <button class="btn btnp" id="btnAddListing">+ New Listing</button>
   </div>
   <div id="llist" class="ilist"></div>
 </div>
 
-<!-- Listing Modal -->
-
-<div class="mo" id="lmo">
-  <div class="mbox" style="max-width:600px">
-    <div class="mtitle" id="lmtitle">CREATE LISTING</div>
-    <div class="fg">
-      <label class="fl2">Link to Inventory Item (optional)</label>
-      <select id="linv" class="fi2">
-        <option value="">-- Select item or create standalone --</option>
-      </select>
-    </div>
-    <div class="fg"><label class="fl2">Listing Title *</label><input type="text" id="ltitle" class="fi2" placeholder="e.g. 2005 Yamaha 115hp 4-Stroke Outboard"></div>
-    <div class="frow">
-      <div class="fg"><label class="fl2">Asking Price ($) *</label><input type="number" id="lprice" class="fi2" placeholder="0.00" min="0" step="0.01"></div>
-      <div class="fg"><label class="fl2">Location</label><input type="text" id="lloc" class="fi2" placeholder="e.g. Freeport, TX"></div>
-    </div>
-    <div class="fg"><label class="fl2">Description</label><textarea id="ldesc" class="fi2" rows="4" placeholder="Condition, hours, what works, what needs work, extras included..."></textarea></div>
-    <div class="fg">
-      <label class="fl2">Photos (up to 5)</label>
-      <input type="file" id="lphotos" class="fi2" accept="image/*" multiple style="padding:8px;cursor:pointer">
-      <div id="lphoto-preview" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:10px"></div>
-    </div>
-    <div class="fg"><label class="fl2">Contact / Notes</label><input type="text" id="lcontact" class="fi2" placeholder="e.g. Call or text Pete at (979) 555-1234"></div>
-    <div class="mact">
-      <button class="btn btnd" id="btnCancelListing">Cancel</button>
-      <button class="btn btns" id="btnSaveListing">Save Listing</button>
-    </div>
-  </div>
-</div>
-
-<!-- Item Modal -->
+<!-- ITEM MODAL -->
 
 <div class="mo" id="imo">
   <div class="mbox">
@@ -311,7 +275,7 @@ footer{text-align:center;padding:22px;font-family:'Bebas Neue',sans-serif;font-s
   </div>
 </div>
 
-<!-- Event Modal -->
+<!-- EVENT MODAL -->
 
 <div class="mo" id="emo">
   <div class="mbox">
@@ -344,595 +308,521 @@ footer{text-align:center;padding:22px;font-family:'Bebas Neue',sans-serif;font-s
   </div>
 </div>
 
+<!-- LISTING MODAL -->
+
+<div class="mo" id="lmo">
+  <div class="mbox" style="max-width:600px">
+    <div class="mtitle" id="lmtitle">CREATE LISTING</div>
+    <div class="fg">
+      <label class="fl2">Link to Inventory Item (optional)</label>
+      <select id="linv" class="fi2"><option value="">-- Select item or create standalone --</option></select>
+    </div>
+    <div class="fg"><label class="fl2">Listing Title *</label><input type="text" id="ltitle" class="fi2" placeholder="e.g. 2005 Yamaha 115hp Outboard"></div>
+    <div class="frow">
+      <div class="fg"><label class="fl2">Asking Price ($)*</label><input type="number" id="lprice" class="fi2" placeholder="0.00" min="0" step="0.01"></div>
+      <div class="fg"><label class="fl2">Location</label><input type="text" id="lloc" class="fi2" placeholder="e.g. Freeport, TX"></div>
+    </div>
+    <div class="fg"><label class="fl2">Description</label><textarea id="ldesc" class="fi2" placeholder="Condition, hours, what works/needs work, extras..."></textarea></div>
+    <div class="fg">
+      <label class="fl2">Photos (up to 5)</label>
+      <input type="file" id="lphotos" class="fi2" accept="image/*" multiple style="padding:8px;cursor:pointer;color:#f0d070">
+      <div id="lphoto-preview" style="display:flex;flex-wrap:wrap;gap:10px;margin-top:10px"></div>
+    </div>
+    <div class="fg"><label class="fl2">Contact Info</label><input type="text" id="lcontact" class="fi2" placeholder="e.g. Call/text Pete (979) 665-2505"></div>
+    <div class="mact">
+      <button class="btn btnd" id="btnCancelListing">Cancel</button>
+      <button class="btn btns" id="btnSaveListing">Save Listing</button>
+    </div>
+  </div>
+</div>
+
+<!-- Image Viewer -->
+
+<div class="imgview" id="imgview"><img id="imgviewImg" src=""></div>
+
 <div class="tc" id="tc"></div>
 <footer>CAPT. PETE'S TREASURES &middot; BUILT FOR THE HUSTLE &middot; 2026</footer>
 
 <script>
-(function() {
-  'use strict';
+(function(){
+'use strict';
 
-  var items = JSON.parse(localStorage.getItem('pt') || '[]');
-  var evs   = JSON.parse(localStorage.getItem('pe') || '[]');
-  var editId = null, editEvId = null;
+var items    = JSON.parse(localStorage.getItem('pt')||'[]');
+var evs      = JSON.parse(localStorage.getItem('pe')||'[]');
+var listings = JSON.parse(localStorage.getItem('pl')||'[]');
+var editId=null, editEvId=null, editLId=null;
+var pendingPhotos=[];
+var calY=new Date().getFullYear(), calM=new Date().getMonth();
+var CATS={boat:'Boat',motor:'Motor',trailer:'Trailer','marine-parts':'Marine Parts','non-marine':'Non-Marine',other:'Other'};
+var CC={boat:'#5090e0',motor:'#c9a84c',trailer:'#4aaa70','marine-parts':'#60b0e8','non-marine':'#c87840',other:'#9870c0'};
 
-  // ─── IndexedDB for photos (much larger storage than localStorage) ───
-  var DB = null;
-  var DB_NAME = 'PeteTreasures', DB_VER = 1, DB_STORE = 'photos';
-  function openDB(cb) {
-    if (DB) { cb(DB); return; }
-    var req = indexedDB.open(DB_NAME, DB_VER);
-    req.onupgradeneeded = function(e) {
-      e.target.result.createObjectStore(DB_STORE);
-    };
-    req.onsuccess = function(e) { DB = e.target.result; cb(DB); };
-    req.onerror   = function()  { cb(null); };
-  }
-  function dbSavePhotos(listingId, photos, cb) {
-    openDB(function(db) {
-      if (!db) { cb && cb(); return; }
-      var tx  = db.transaction(DB_STORE, 'readwrite');
-      var st  = tx.objectStore(DB_STORE);
-      st.put(photos, listingId);
-      tx.oncomplete = function() { cb && cb(); };
-      tx.onerror    = function() { cb && cb(); };
-    });
-  }
-  function dbLoadPhotos(listingId, cb) {
-    openDB(function(db) {
-      if (!db) { cb([]); return; }
-      var tx  = db.transaction(DB_STORE, 'readonly');
-      var req = tx.objectStore(DB_STORE).get(listingId);
-      req.onsuccess = function() { cb(req.result || []); };
-      req.onerror   = function() { cb([]); };
-    });
-  }
-  function dbDeletePhotos(listingId) {
-    openDB(function(db) {
-      if (!db) return;
-      var tx = db.transaction(DB_STORE, 'readwrite');
-      tx.objectStore(DB_STORE).delete(listingId);
-    });
-  }
-  function loadAllListingPhotos(cb) {
-    var remaining = listings.length;
-    if (!remaining) { cb(); return; }
-    listings.forEach(function(l) {
-      dbLoadPhotos(l.id, function(photos) {
-        l.photos = photos;
-        remaining--;
-        if (remaining === 0) cb();
-      });
-    });
-  }
-  var now = new Date(), calY = now.getFullYear(), calM = now.getMonth();
+function ge(id){return document.getElementById(id);}
+function fmt(n){return '$'+Number(n||0).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});}
+function emp(t,s){return '<div class="empty"><div class="ei">&#128676;</div><div class="et2">'+t+'</div><div class="es2">'+s+'</div></div>';}
+function saveItems(){try{localStorage.setItem('pt',JSON.stringify(items));}catch(e){}}
+function saveEvs(){try{localStorage.setItem('pe',JSON.stringify(evs));}catch(e){}}
 
-  var CATS = {boat:'Boat',motor:'Motor',trailer:'Trailer','marine-parts':'Marine Parts','non-marine':'Non-Marine',other:'Other'};
-  var CC   = {boat:'#5090e0',motor:'#c9a84c',trailer:'#4aaa70','marine-parts':'#60b0e8','non-marine':'#c87840',other:'#9870c0'};
-
-  function saveItems() { localStorage.setItem('pt', JSON.stringify(items)); }
-  function saveEvs()   { localStorage.setItem('pe', JSON.stringify(evs)); }
-  function fmt(n) { return '$' + Number(n||0).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}); }
-  function emp(t,s) { return '<div class="empty"><div class="ei">&#128676;</div><div class="et">'+t+'</div><div class="es">'+s+'</div></div>'; }
-  function ge(id) { return document.getElementById(id); }
-
-  // NAV - use data-page attribute and event delegation
-  function showPage(id) {
-    document.querySelectorAll('.pg').forEach(function(p) { p.classList.remove('on'); });
-    document.querySelectorAll('.tab').forEach(function(b) { b.classList.remove('on'); });
-    var pg = ge(id);
-    if (pg) pg.classList.add('on');
-    document.querySelectorAll('.tab').forEach(function(b) {
-      if (b.getAttribute('data-page') === id) b.classList.add('on');
-    });
-    if (id === 'dash')      rDash();
-    else if (id === 'inv')  rInv();
-    else if (id === 'sold') rSold();
-    else if (id === 'calc') rSum();
-    else if (id === 'cal')       { rCal(); rEvList(); }
-    else if (id === 'listings') rListings();
-  }
-
-  document.querySelectorAll('.tab').forEach(function(btn) {
-    btn.addEventListener('click', function() { showPage(this.getAttribute('data-page')); });
+// ── IndexedDB for photos ──────────────────────────────────────
+var IDB=null;
+function openIDB(cb){
+  if(IDB){cb(IDB);return;}
+  var r=indexedDB.open('PeteTreasures',1);
+  r.onupgradeneeded=function(e){e.target.result.createObjectStore('photos');};
+  r.onsuccess=function(e){IDB=e.target.result;cb(IDB);};
+  r.onerror=function(){cb(null);};
+}
+function idbSet(id,data,cb){
+  openIDB(function(db){
+    if(!db){cb&&cb();return;}
+    var tx=db.transaction('photos','readwrite');
+    tx.objectStore('photos').put(data,id);
+    tx.oncomplete=function(){cb&&cb();};
+    tx.onerror=function(){cb&&cb();};
   });
-  document.querySelectorAll('[data-page]').forEach(function(el) {
-    if (!el.classList.contains('tab')) {
-      el.addEventListener('click', function() { showPage(this.getAttribute('data-page')); });
-    }
+}
+function idbGet(id,cb){
+  openIDB(function(db){
+    if(!db){cb([]);return;}
+    var tx=db.transaction('photos','readonly');
+    var r=tx.objectStore('photos').get(id);
+    r.onsuccess=function(){cb(r.result||[]);};
+    r.onerror=function(){cb([]);};
   });
+}
+function idbDel(id){
+  openIDB(function(db){
+    if(!db)return;
+    db.transaction('photos','readwrite').objectStore('photos').delete(id);
+  });
+}
 
-  // DASHBOARD
-  function rDash() {
-    var act = items.filter(function(i){ return i.status !== 'sold'; });
-    var sol = items.filter(function(i){ return i.status === 'sold'; });
-    var aI  = act.reduce(function(s,i){ return s+(parseFloat(i.b)||0)+(parseFloat(i.rp)||0); }, 0);
-    var rev = sol.reduce(function(s,i){ return s+(parseFloat(i.sp)||0); }, 0);
-    var cst = sol.reduce(function(s,i){ return s+(parseFloat(i.b)||0)+(parseFloat(i.rp)||0); }, 0);
-    var prf = rev - cst;
-    ge('scards').innerHTML =
-      '<div class="sc"><div class="slbl">In Stock</div><div class="sval">'+act.length+'</div><div class="ssub">'+items.length+' total</div></div>'+
-      '<div class="sc r"><div class="slbl">Capital Tied Up</div><div class="sval r">'+fmt(aI)+'</div><div class="ssub">'+act.length+' active</div></div>'+
-      '<div class="sc g"><div class="slbl">Total Profit</div><div class="sval g">'+fmt(prf)+'</div><div class="ssub">'+sol.length+' sold</div></div>'+
-      '<div class="sc b"><div class="slbl">Revenue</div><div class="sval b">'+fmt(rev)+'</div><div class="ssub">all time</div></div>';
-    var cp = {}, mx = 0;
-    Object.keys(CATS).forEach(function(c) {
-      var p = sol.filter(function(i){ return i.c === c; }).reduce(function(s,i){ return s+(parseFloat(i.sp)||0)-(parseFloat(i.b)||0)-(parseFloat(i.rp)||0); }, 0);
-      cp[c] = p; if (Math.abs(p) > mx) mx = Math.abs(p);
+// Save listings (metadata only to localStorage, photos to IDB)
+function saveListings(){
+  var meta=listings.map(function(l){
+    var c={};Object.keys(l).forEach(function(k){if(k!=='photos')c[k]=l[k];});return c;
+  });
+  try{localStorage.setItem('pl',JSON.stringify(meta));}catch(e){}
+  listings.forEach(function(l){idbSet(l.id,l.photos||[]);});
+}
+
+// Load all listing photos from IDB then call cb
+function loadPhotos(cb){
+  if(!listings.length){cb();return;}
+  var rem=listings.length;
+  listings.forEach(function(l){
+    idbGet(l.id,function(p){
+      l.photos=p;
+      if(--rem===0)cb();
     });
-    ge('cchart').innerHTML = Object.keys(CATS).map(function(c) {
-      var p = cp[c]||0, pct = mx > 0 ? (Math.abs(p)/mx*100) : 0, col = p >= 0 ? CC[c] : '#e05050';
-      return '<div class="cbrow"><div class="cblbl">'+CATS[c]+'</div><div class="cbtrk"><div class="cbfil" style="width:'+pct+'%;background:'+col+'"></div></div><div class="cbval" style="color:'+col+'">'+fmt(p)+'</div></div>';
-    }).join('');
-    var rec = items.slice().sort(function(a,b){ return (b.dt||'').localeCompare(a.dt||''); }).slice(0,5);
-    ge('recent').innerHTML = rec.length ? rec.map(function(i){ return icard(i); }).join('') : emp('No Items Yet','Add your first item in Inventory');
-  }
-
-  // INVENTORY
-  function rInv() {
-    var q   = (ge('sinv').value || '').toLowerCase();
-    var cat = ge('fcat').value;
-    var f   = items.filter(function(i){ return i.status !== 'sold'; });
-    if (cat) f = f.filter(function(i){ return i.c === cat; });
-    if (q)   f = f.filter(function(i){ return (i.n||'').toLowerCase().indexOf(q)>=0||(i.mo||'').toLowerCase().indexOf(q)>=0||(i.no||'').toLowerCase().indexOf(q)>=0; });
-    ge('ilist').innerHTML = f.length ? f.map(function(i){ return icard(i,true); }).join('') : emp('Nothing Here','Add items or adjust the filter');
-  }
-  ge('sinv').addEventListener('input', rInv);
-  ge('fcat').addEventListener('change', rInv);
-
-  // SOLD
-  function rSold() {
-    var sol = items.filter(function(i){ return i.status === 'sold'; });
-    ge('slist').innerHTML = sol.length ? sol.map(function(i){ return icard(i,true); }).join('') : emp('No Sold Items Yet','Mark items as sold when you flip them!');
-  }
-
-  // ITEM CARD
-  function icard(item, ed) {
-    var inv = (parseFloat(item.b)||0)+(parseFloat(item.rp)||0), sell = parseFloat(item.sp)||0, profit = sell-inv;
-    var roi = inv > 0 ? ((profit/inv)*100).toFixed(0) : 0;
-    var isSold = item.status === 'sold';
-    var badge = isSold
-      ? '<div class="pbadge '+(profit<0?'l':'')+'">'+(profit>=0?'+':'')+fmt(profit)+'</div>'
-      : '<div class="pbadge p">IN STOCK</div>';
-    var fin = isSold
-      ? '<div class="ifin"><div class="fi">Paid: <span>'+fmt(item.b)+'</span></div>'+(item.rp>0?'<div class="fi">Costs: <span>'+fmt(item.rp)+'</span></div>':'')+
-        '<div class="fi">Invested: <span>'+fmt(inv)+'</span></div><div class="fi">Sold: <span>'+fmt(sell)+'</span></div>'+
-        '<div class="fi">ROI: <span class="'+(profit>=0?'fp':'fl')+'">'+roi+'%</span></div></div>'
-      : '<div class="ifin"><div class="fi">Paid: <span>'+fmt(item.b)+'</span></div>'+(item.rp>0?'<div class="fi">Costs: <span>'+fmt(item.rp)+'</span></div>':'')+
-        '<div class="fi">Invested: <span>'+fmt(inv)+'</span></div>'+(item.sp>0?'<div class="fi">Asking: <span>'+fmt(sell)+'</span></div>':'')+
-        '</div>';
-    var acts = ed
-      ? '<div class="iact">'+badge+
-        '<div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end">'+
-        '<button class="btn btnp btnsm" data-action="edit" data-id="'+item.id+'">Edit</button>'+
-        '<button class="btn btnd btnsm" data-action="del" data-id="'+item.id+'">Del</button>'+
-        (!isSold ? '<button class="btn btns btnsm" data-action="sold" data-id="'+item.id+'">Sold</button>' : '')+
-        '</div></div>'
-      : '<div class="iact">'+badge+'</div>';
-    return '<div class="icard '+(isSold?'sold':'')+'"><div>'+
-      '<div class="iname">'+item.n+'</div>'+
-      '<div class="imeta"><span class="tag">'+(CATS[item.c]||item.c)+'</span>'+
-      '<span class="tag '+(isSold?'ts':'ta')+'">'+(isSold?'Sold':'Active')+'</span>'+
-      (item.dt ? '<span class="tag">'+item.dt+'</span>' : '')+
-      '</div>'+(item.mo ? '<div class="inote">'+item.mo+'</div>' : '')+
-      fin+(item.no ? '<div class="inote">'+item.no+'</div>' : '')+
-      '</div>'+acts+'</div>';
-  }
-
-  // Event delegation for item actions
-  document.addEventListener('click', function(e) {
-    var btn = e.target.closest('[data-action]');
-    if (!btn) return;
-    var action = btn.getAttribute('data-action');
-    var id     = btn.getAttribute('data-id');
-    if (action === 'edit')   openEdit(id);
-    else if (action === 'del')  delItem(id);
-    else if (action === 'sold') mkSold(id);
-    else if (action === 'editev')  openEditEv(id);
-    else if (action === 'delev')   delEv(id);
-    else if (action === 'selday') openEv(id);
   });
+}
 
-  // ADD / EDIT ITEM MODAL
-  ge('btnAdd').addEventListener('click', function() { openAdd(); });
-  function openAdd() {
-    editId = null;
-    ge('mtitle').textContent = 'ADD ITEM';
-    ge('fn').value=''; ge('fc').value='boat'; ge('fb').value=''; ge('frp').value='';
-    ge('fsp').value=''; ge('fst').value='active'; ge('fmo').value=''; ge('fno').value='';
-    ge('fdt').value = now.toISOString().split('T')[0];
-    ge('imo').classList.add('on');
-  }
-  function openEdit(id) {
-    var item = items.find(function(i){ return i.id === id; }); if (!item) return;
-    editId = id;
-    ge('mtitle').textContent = 'EDIT ITEM';
-    ge('fn').value=item.n||''; ge('fc').value=item.c||'boat'; ge('fb').value=item.b||'';
-    ge('frp').value=item.rp||''; ge('fsp').value=item.sp||''; ge('fst').value=item.status||'active';
-    ge('fmo').value=item.mo||''; ge('fno').value=item.no||''; ge('fdt').value=item.dt||'';
-    ge('imo').classList.add('on');
-  }
-  ge('btnCancelItem').addEventListener('click', function() { ge('imo').classList.remove('on'); });
-  ge('imo').addEventListener('click', function(e) { if (e.target === this) ge('imo').classList.remove('on'); });
-  ge('btnSaveItem').addEventListener('click', function() {
-    var n = ge('fn').value.trim(), b = parseFloat(ge('fb').value)||0;
-    if (!n) { alert('Name required!'); return; }
-    if (!b) { alert('Purchase price required!'); return; }
-    var item = {
-      id: editId || Date.now().toString(),
-      n:n, c:ge('fc').value, b:b,
-      rp: parseFloat(ge('frp').value)||0,
-      sp: parseFloat(ge('fsp').value)||0,
-      status: ge('fst').value,
-      mo: ge('fmo').value.trim(),
-      no: ge('fno').value.trim(),
-      dt: ge('fdt').value
-    };
-    if (editId) { items[items.findIndex(function(i){ return i.id===editId; })] = item; }
-    else { items.unshift(item); }
-    saveItems(); ge('imo').classList.remove('on'); rInv(); rDash();
+// ── NAV ──────────────────────────────────────────────────────
+function showPage(id){
+  document.querySelectorAll('.pg').forEach(function(p){p.classList.remove('on');});
+  document.querySelectorAll('.tab').forEach(function(b){b.classList.remove('on');});
+  var pg=ge(id);if(pg)pg.classList.add('on');
+  document.querySelectorAll('.tab').forEach(function(b){if(b.getAttribute('data-page')===id)b.classList.add('on');});
+  if(id==='dash')rDash();
+  else if(id==='inv')rInv();
+  else if(id==='sold')rSold();
+  else if(id==='calc')rSum();
+  else if(id==='cal'){rCal();rEvList();}
+  else if(id==='listings')rListings();
+}
+document.getElementById('mainnav').addEventListener('click',function(e){
+  var btn=e.target.closest('.tab');
+  if(btn&&btn.getAttribute('data-page'))showPage(btn.getAttribute('data-page'));
+});
+ge('dash').parentElement.querySelector('[data-page="dash"]');
+// Logo click
+document.querySelector('[data-page="dash"]').addEventListener('click',function(){showPage('dash');});
+
+// ── DASHBOARD ────────────────────────────────────────────────
+function rDash(){
+  var act=items.filter(function(i){return i.status!=='sold';}),sol=items.filter(function(i){return i.status==='sold';});
+  var aI=act.reduce(function(s,i){return s+(parseFloat(i.b)||0)+(parseFloat(i.rp)||0);},0);
+  var rev=sol.reduce(function(s,i){return s+(parseFloat(i.sp)||0);},0);
+  var cst=sol.reduce(function(s,i){return s+(parseFloat(i.b)||0)+(parseFloat(i.rp)||0);},0);
+  var prf=rev-cst;
+  ge('scards').innerHTML=
+    '<div class="sc"><div class="slbl">In Stock</div><div class="sval">'+act.length+'</div><div class="ssub">'+items.length+' total</div></div>'+
+    '<div class="sc r"><div class="slbl">Capital Tied Up</div><div class="sval r">'+fmt(aI)+'</div></div>'+
+    '<div class="sc g"><div class="slbl">Total Profit</div><div class="sval g">'+fmt(prf)+'</div><div class="ssub">'+sol.length+' sold</div></div>'+
+    '<div class="sc b"><div class="slbl">Revenue</div><div class="sval b">'+fmt(rev)+'</div></div>';
+  var cp={},mx=0;
+  Object.keys(CATS).forEach(function(c){
+    var p=sol.filter(function(i){return i.c===c;}).reduce(function(s,i){return s+(parseFloat(i.sp)||0)-(parseFloat(i.b)||0)-(parseFloat(i.rp)||0);},0);
+    cp[c]=p;if(Math.abs(p)>mx)mx=Math.abs(p);
   });
-  function delItem(id) {
-    if (!confirm('Delete this item?')) return;
-    items = items.filter(function(i){ return i.id !== id; });
-    saveItems(); rInv(); rSold(); rDash();
-  }
-  function mkSold(id) {
-    var item = items.find(function(i){ return i.id === id; }); if (!item) return;
-    var p = prompt('Sale price for ' + item.n + ':', item.sp||'');
-    if (p === null) return;
-    item.sp = parseFloat(p)||0; item.status = 'sold';
-    saveItems(); rInv(); rDash();
-  }
+  ge('cchart').innerHTML=Object.keys(CATS).map(function(c){
+    var p=cp[c]||0,pct=mx>0?(Math.abs(p)/mx*100):0,col=p>=0?CC[c]:'#e05050';
+    return '<div class="cbrow"><div class="cblbl">'+CATS[c]+'</div><div class="cbtrk"><div class="cbfil" style="width:'+pct+'%;background:'+col+'"></div></div><div class="cbval" style="color:'+col+'">'+fmt(p)+'</div></div>';
+  }).join('');
+  var rec=items.slice().sort(function(a,b){return(b.dt||'').localeCompare(a.dt||'');}).slice(0,5);
+  ge('recent').innerHTML=rec.length?rec.map(function(i){return icard(i);}).join(''):emp('No Items Yet','Add your first item in Inventory');
+}
 
-  // CALCULATOR
-  function doCalc() {
-    var b=parseFloat(ge('cbuy').value)||0, r=parseFloat(ge('crep').value)||0, s=parseFloat(ge('csel').value)||0;
-    var inv=b+r, profit=s-inv, roi=inv>0?((profit/inv)*100).toFixed(1):0;
-    ge('cli').textContent=fmt(inv); ge('cls').textContent=fmt(s);
-    ge('clp').textContent=fmt(profit); ge('clr').textContent=roi+'%';
-    var el=ge('cbig'); el.textContent=fmt(profit); el.className='crval'+(profit<0?' neg':'');
-  }
-  ge('cbuy').addEventListener('input',doCalc); ge('crep').addEventListener('input',doCalc); ge('csel').addEventListener('input',doCalc);
+// ── INVENTORY ────────────────────────────────────────────────
+function rInv(){
+  var q=(ge('sinv').value||'').toLowerCase(),cat=ge('fcat').value;
+  var f=items.filter(function(i){return i.status!=='sold';});
+  if(cat)f=f.filter(function(i){return i.c===cat;});
+  if(q)f=f.filter(function(i){return(i.n||'').toLowerCase().indexOf(q)>=0||(i.mo||'').toLowerCase().indexOf(q)>=0;});
+  ge('ilist').innerHTML=f.length?f.map(function(i){return icard(i,true);}).join(''):emp('Nothing Here','Add items or adjust the filter');
+}
+ge('sinv').addEventListener('input',rInv);
+ge('fcat').addEventListener('change',rInv);
 
-  function rSum() {
-    var sol = items.filter(function(i){ return i.status==='sold'; });
-    var rev = sol.reduce(function(s,i){ return s+(parseFloat(i.sp)||0); },0);
-    var cst = sol.reduce(function(s,i){ return s+(parseFloat(i.b)||0)+(parseFloat(i.rp)||0); },0);
-    var prf = rev-cst, avg = sol.length ? prf/sol.length : 0;
-    var best = sol.reduce(function(bst,i){ var p=(parseFloat(i.sp)||0)-(parseFloat(i.b)||0)-(parseFloat(i.rp)||0); return p>bst.p?{n:i.n,p:p}:bst; },{n:'None yet',p:0});
-    var inStk = items.filter(function(i){ return i.status!=='sold'; });
-    var inCap = inStk.reduce(function(s,i){ return s+(parseFloat(i.b)||0)+(parseFloat(i.rp)||0); },0);
-    ge('sumcard').innerHTML =
-      '<div class="cline">Total Sold <span>'+sol.length+'</span></div>'+
-      '<div class="cline">Total Revenue <span>'+fmt(rev)+'</span></div>'+
-      '<div class="cline">Total Invested (sold) <span>'+fmt(cst)+'</span></div>'+
-      '<div class="cline">Total Profit <span style="color:'+(prf>=0?'#4aaa70':'#e05050')+'">'+fmt(prf)+'</span></div>'+
-      '<div class="cline">Avg Profit / Item <span>'+fmt(avg)+'</span></div>'+
-      '<div class="cline">Best Flip <span style="color:#f0d070">'+best.n+' (+'+fmt(best.p)+')</span></div>'+
-      '<div class="cline">Items In Stock <span>'+inStk.length+'</span></div>'+
-      '<div class="cline">Capital In Stock <span style="color:#e05050">'+fmt(inCap)+'</span></div>';
-  }
+function rSold(){
+  var sol=items.filter(function(i){return i.status==='sold';});
+  ge('slist').innerHTML=sol.length?sol.map(function(i){return icard(i,true);}).join(''):emp('No Sold Items Yet','Mark items as sold when you flip them!');
+}
 
-  // CALENDAR
-  var MO = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-  function rCal() {
-    ge('calml').textContent = MO[calM]+' '+calY;
-    var first=new Date(calY,calM,1).getDay(), dim=new Date(calY,calM+1,0).getDate(), prev=new Date(calY,calM,0).getDate();
-    var today=new Date().toISOString().split('T')[0], html='';
-    for (var i=first-1; i>=0; i--) html+='<div class="cday om"><div class="cdn">'+(prev-i)+'</div></div>';
-    for (var d=1; d<=dim; d++) {
-      var ds = calY+'-'+String(calM+1).padStart(2,'0')+'-'+String(d).padStart(2,'0');
-      var de = evs.filter(function(e){ return e.d===ds; });
-      html += '<div class="cday'+(ds===today?' td':'')+(de.length?' he':'')+'" data-action="selday" data-id="'+ds+'">';
-      html += '<div class="cdn">'+d+'</div>';
-      html += de.slice(0,3).map(function(e){ return '<div class="cdot '+e.ty+'">'+e.ti+'</div>'; }).join('');
-      html += '</div>';
-    }
-    var rem=(7-(first+dim)%7)%7;
-    for (var d2=1; d2<=rem; d2++) html+='<div class="cday om"><div class="cdn">'+d2+'</div></div>';
-    ge('ccells').innerHTML = html;
-  }
-  ge('calPrev').addEventListener('click', function() { calM--; if(calM<0){calM=11;calY--;} rCal(); });
-  ge('calNext').addEventListener('click', function() { calM++; if(calM>11){calM=0;calY++;} rCal(); });
+function icard(item,ed){
+  var inv=(parseFloat(item.b)||0)+(parseFloat(item.rp)||0),sell=parseFloat(item.sp)||0,profit=sell-inv;
+  var roi=inv>0?((profit/inv)*100).toFixed(0):0,isSold=item.status==='sold';
+  var badge=isSold?'<div class="pbadge '+(profit<0?'l':'')+'">'+(profit>=0?'+':'')+fmt(profit)+'</div>':'<div class="pbadge p">IN STOCK</div>';
+  var fin=isSold
+    ?'<div class="ifin"><div class="fi">Paid: <span>'+fmt(item.b)+'</span></div>'+(item.rp>0?'<div class="fi">Costs: <span>'+fmt(item.rp)+'</span></div>':'')+
+      '<div class="fi">Invested: <span>'+fmt(inv)+'</span></div><div class="fi">Sold: <span>'+fmt(sell)+'</span></div>'+
+      '<div class="fi">ROI: <span class="'+(profit>=0?'fp':'fl2b')+'">'+roi+'%</span></div></div>'
+    :'<div class="ifin"><div class="fi">Paid: <span>'+fmt(item.b)+'</span></div>'+(item.rp>0?'<div class="fi">Costs: <span>'+fmt(item.rp)+'</span></div>':'')+
+      '<div class="fi">Invested: <span>'+fmt(inv)+'</span></div>'+(item.sp>0?'<div class="fi">Asking: <span>'+fmt(sell)+'</span></div>':'')+
+      '</div>';
+  var acts=ed
+    ?'<div class="iact">'+badge+
+      '<div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end">'+
+      '<button class="btn btnp btnsm" data-action="edit" data-id="'+item.id+'">Edit</button>'+
+      '<button class="btn btnd btnsm" data-action="del" data-id="'+item.id+'">Del</button>'+
+      (!isSold?'<button class="btn btns btnsm" data-action="mksold" data-id="'+item.id+'">Sold</button>':'')+
+      '</div></div>'
+    :'<div class="iact">'+badge+'</div>';
+  return '<div class="icard '+(isSold?'sold':'')+'"><div>'+
+    '<div class="iname">'+item.n+'</div>'+
+    '<div class="imeta"><span class="tag">'+(CATS[item.c]||item.c)+'</span>'+
+    '<span class="tag '+(isSold?'ts':'ta')+'">'+(isSold?'Sold':'Active')+'</span>'+
+    (item.dt?'<span class="tag">'+item.dt+'</span>':'')+
+    '</div>'+(item.mo?'<div class="inote">'+item.mo+'</div>':'')+
+    fin+(item.no?'<div class="inote">'+item.no+'</div>':'')+
+    '</div>'+acts+'</div>';
+}
 
-  function rEvList(fd) {
-    var today=new Date().toISOString().split('T')[0];
-    var filt = fd ? evs.filter(function(e){ return e.d===fd; }) : evs.filter(function(e){ return e.d>=today; }).sort(function(a,b){ return a.d.localeCompare(b.d); });
-    ge('evlbl').textContent = fd ? 'Events on '+fd : 'Upcoming Events';
-    var TL={buy:'Buying Trip',sell:'Sale',appointment:'Appointment',reminder:'Reminder'};
-    var CL={buy:'eb',sell:'es2',appointment:'ea',reminder:'er'};
-    if (!filt.length) { ge('evlist').innerHTML = emp(fd?'No Events':'No Upcoming Events','Tap + Add Event to schedule something'); return; }
-    ge('evlist').innerHTML = filt.map(function(ev) {
-      return '<div class="eitem '+(CL[ev.ty]||'')+'">'+
-        '<div style="flex:1"><div class="etitle">'+ev.ti+'</div>'+
-        '<div class="emeta">'+
-        '<span class="ebadge '+ev.ty+'">'+(TL[ev.ty]||ev.ty)+'</span>'+
-        '<span>'+ev.d+'</span>'+
-        (ev.tm?'<span>'+ev.tm+'</span>':'')+
-        (ev.no?'<span>'+ev.no+'</span>':'')+
-        (ev.al!==undefined&&ev.al!==''?'<span style="color:#c9a84c">Alarm set</span>':'')+
-        '</div></div>'+
-        '<div style="display:flex;gap:6px;flex-shrink:0">'+
-        '<button class="btn btnp btnsm" data-action="editev" data-id="'+ev.id+'">Edit</button>'+
-        '<button class="btn btnd btnsm" data-action="delev" data-id="'+ev.id+'">Del</button>'+
-        '</div></div>';
-    }).join('');
-  }
+ge('btnAdd').addEventListener('click',openAdd);
+function openAdd(){
+  editId=null;ge('mtitle').textContent='ADD ITEM';
+  ['fn','fb','frp','fsp','fmo','fno'].forEach(function(id){ge(id).value='';});
+  ge('fc').value='boat';ge('fst').value='active';
+  ge('fdt').value=new Date().toISOString().split('T')[0];
+  ge('imo').classList.add('on');
+}
+function openEdit(id){
+  var item=items.find(function(i){return i.id===id;});if(!item)return;
+  editId=id;ge('mtitle').textContent='EDIT ITEM';
+  ge('fn').value=item.n||'';ge('fc').value=item.c||'boat';ge('fb').value=item.b||'';
+  ge('frp').value=item.rp||'';ge('fsp').value=item.sp||'';ge('fst').value=item.status||'active';
+  ge('fmo').value=item.mo||'';ge('fno').value=item.no||'';ge('fdt').value=item.dt||'';
+  ge('imo').classList.add('on');
+}
+ge('btnCancelItem').addEventListener('click',function(){ge('imo').classList.remove('on');});
+ge('imo').addEventListener('click',function(e){if(e.target===this)ge('imo').classList.remove('on');});
+ge('btnSaveItem').addEventListener('click',function(){
+  var n=ge('fn').value.trim(),b=parseFloat(ge('fb').value)||0;
+  if(!n){alert('Name required!');return;}if(!b){alert('Purchase price required!');return;}
+  var item={id:editId||Date.now().toString(),n:n,c:ge('fc').value,b:b,
+    rp:parseFloat(ge('frp').value)||0,sp:parseFloat(ge('fsp').value)||0,
+    status:ge('fst').value,mo:ge('fmo').value.trim(),no:ge('fno').value.trim(),dt:ge('fdt').value};
+  if(editId){items[items.findIndex(function(i){return i.id===editId;})]=item;}else{items.unshift(item);}
+  saveItems();ge('imo').classList.remove('on');rInv();rDash();
+});
+function delItem(id){
+  if(!confirm('Delete this item?'))return;
+  items=items.filter(function(i){return i.id!==id;});
+  saveItems();rInv();rSold();rDash();
+}
+function mkSold(id){
+  var item=items.find(function(i){return i.id===id;});if(!item)return;
+  var p=prompt('Sale price for '+item.n+':',item.sp||'');if(p===null)return;
+  item.sp=parseFloat(p)||0;item.status='sold';saveItems();rInv();rDash();
+}
 
-  // EVENT MODAL
-  ge('btnAddEv').addEventListener('click', function() { openEv(); });
-  function openEv(pre) {
-    editEvId = null;
-    ge('emtitle').textContent = 'ADD EVENT';
-    ge('eti').value=''; ge('ety').value='appointment';
-    ge('edt').value = pre || new Date().toISOString().split('T')[0];
-    ge('etm').value=''; ge('eal').value=''; ge('eno').value='';
-    ge('emo').classList.add('on');
+// ── CALCULATOR ───────────────────────────────────────────────
+function doCalc(){
+  var b=parseFloat(ge('cbuy').value)||0,r=parseFloat(ge('crep').value)||0,s=parseFloat(ge('csel').value)||0;
+  var inv=b+r,profit=s-inv,roi=inv>0?((profit/inv)*100).toFixed(1):0;
+  ge('cli').textContent=fmt(inv);ge('cls').textContent=fmt(s);
+  ge('clp').textContent=fmt(profit);ge('clr').textContent=roi+'%';
+  var el=ge('cbig');el.textContent=fmt(profit);el.className='crval'+(profit<0?' neg':'');
+}
+ge('cbuy').addEventListener('input',doCalc);ge('crep').addEventListener('input',doCalc);ge('csel').addEventListener('input',doCalc);
+function rSum(){
+  var sol=items.filter(function(i){return i.status==='sold';});
+  var rev=sol.reduce(function(s,i){return s+(parseFloat(i.sp)||0);},0);
+  var cst=sol.reduce(function(s,i){return s+(parseFloat(i.b)||0)+(parseFloat(i.rp)||0);},0);
+  var prf=rev-cst,avg=sol.length?prf/sol.length:0;
+  var best=sol.reduce(function(bst,i){var p=(parseFloat(i.sp)||0)-(parseFloat(i.b)||0)-(parseFloat(i.rp)||0);return p>bst.p?{n:i.n,p:p}:bst;},{n:'None yet',p:0});
+  var inStk=items.filter(function(i){return i.status!=='sold';});
+  var inCap=inStk.reduce(function(s,i){return s+(parseFloat(i.b)||0)+(parseFloat(i.rp)||0);},0);
+  ge('sumcard').innerHTML=
+    '<div class="cline">Total Sold <span>'+sol.length+'</span></div>'+
+    '<div class="cline">Total Revenue <span>'+fmt(rev)+'</span></div>'+
+    '<div class="cline">Total Invested (sold) <span>'+fmt(cst)+'</span></div>'+
+    '<div class="cline">Total Profit <span style="color:'+(prf>=0?'#4aaa70':'#e05050')+'">'+fmt(prf)+'</span></div>'+
+    '<div class="cline">Avg Profit / Item <span>'+fmt(avg)+'</span></div>'+
+    '<div class="cline">Best Flip <span style="color:#f0d070">'+best.n+' (+'+fmt(best.p)+')</span></div>'+
+    '<div class="cline">Items In Stock <span>'+inStk.length+'</span></div>'+
+    '<div class="cline">Capital In Stock <span style="color:#e05050">'+fmt(inCap)+'</span></div>';
+}
+
+// ── CALENDAR ─────────────────────────────────────────────────
+var MO=['January','February','March','April','May','June','July','August','September','October','November','December'];
+function rCal(){
+  ge('calml').textContent=MO[calM]+' '+calY;
+  var first=new Date(calY,calM,1).getDay(),dim=new Date(calY,calM+1,0).getDate(),prev=new Date(calY,calM,0).getDate();
+  var today=new Date().toISOString().split('T')[0],html='';
+  for(var i=first-1;i>=0;i--)html+='<div class="cday om"><div class="cdn">'+(prev-i)+'</div></div>';
+  for(var d=1;d<=dim;d++){
+    var ds=calY+'-'+String(calM+1).padStart(2,'0')+'-'+String(d).padStart(2,'0');
+    var de=evs.filter(function(e){return e.d===ds;});
+    html+='<div class="cday'+(ds===today?' td':'')+(de.length?' he':'')+'" data-action="selday" data-id="'+ds+'">';
+    html+='<div class="cdn">'+d+'</div>';
+    html+=de.slice(0,3).map(function(e){return'<div class="cdot '+e.ty+'">'+e.ti+'</div>';}).join('');
+    html+='</div>';
   }
-  function openEditEv(id) {
-    var ev = evs.find(function(e){ return e.id===id; }); if (!ev) return;
-    editEvId = id;
-    ge('emtitle').textContent = 'EDIT EVENT';
-    ge('eti').value=ev.ti||''; ge('ety').value=ev.ty||'appointment';
-    ge('edt').value=ev.d||''; ge('etm').value=ev.tm||'';
-    ge('eal').value=ev.al!==undefined?ev.al:''; ge('eno').value=ev.no||'';
-    ge('emo').classList.add('on');
-  }
-  ge('btnCancelEv').addEventListener('click', function() { ge('emo').classList.remove('on'); });
-  ge('emo').addEventListener('click', function(e) { if (e.target === this) ge('emo').classList.remove('on'); });
-  ge('btnSaveEv').addEventListener('click', function() {
-    var title=ge('eti').value.trim(), date=ge('edt').value;
-    if (!title) { alert('Title required!'); return; }
-    if (!date)  { alert('Date required!');  return; }
-    var ev = {
-      id: editEvId || Date.now().toString(),
-      ti:title, ty:ge('ety').value, d:date,
-      tm:ge('etm').value, al:ge('eal').value,
-      no:ge('eno').value.trim()
-    };
-    if (editEvId) { evs[evs.findIndex(function(e){ return e.id===editEvId; })] = ev; }
-    else { evs.push(ev); }
-    saveEvs(); schedAlarm(ev); ge('emo').classList.remove('on'); rCal(); rEvList();
-    toast('Event Saved', ev.ti + ' added to calendar.', false);
+  var rem=(7-(first+dim)%7)%7;
+  for(var d2=1;d2<=rem;d2++)html+='<div class="cday om"><div class="cdn">'+d2+'</div></div>';
+  ge('ccells').innerHTML=html;
+}
+ge('calPrev').addEventListener('click',function(){calM--;if(calM<0){calM=11;calY--;}rCal();});
+ge('calNext').addEventListener('click',function(){calM++;if(calM>11){calM=0;calY++;}rCal();});
+function rEvList(fd){
+  var today=new Date().toISOString().split('T')[0];
+  var filt=fd?evs.filter(function(e){return e.d===fd;}):evs.filter(function(e){return e.d>=today;}).sort(function(a,b){return a.d.localeCompare(b.d);});
+  ge('evlbl').textContent=fd?'Events on '+fd:'Upcoming Events';
+  var TL={buy:'Buying Trip',sell:'Sale',appointment:'Appointment',reminder:'Reminder'};
+  var CL={buy:'eb',sell:'es3',appointment:'ea',reminder:'er'};
+  if(!filt.length){ge('evlist').innerHTML=emp(fd?'No Events':'No Upcoming Events','Tap + Add Event to schedule something');return;}
+  ge('evlist').innerHTML=filt.map(function(ev){
+    return '<div class="eitem '+(CL[ev.ty]||'')+'">'+
+      '<div style="flex:1"><div class="etitle2">'+ev.ti+'</div>'+
+      '<div class="emeta"><span class="ebadge '+ev.ty+'">'+(TL[ev.ty]||ev.ty)+'</span>'+
+      '<span>'+ev.d+'</span>'+(ev.tm?'<span>'+ev.tm+'</span>':'')+
+      (ev.no?'<span>'+ev.no+'</span>':'')+(ev.al!==undefined&&ev.al!==''?'<span style="color:#c9a84c">Alarm set</span>':'')+
+      '</div></div>'+
+      '<div style="display:flex;gap:6px;flex-shrink:0">'+
+      '<button class="btn btnp btnsm" data-action="editev" data-id="'+ev.id+'">Edit</button>'+
+      '<button class="btn btnd btnsm" data-action="delev" data-id="'+ev.id+'">Del</button>'+
+      '</div></div>';
+  }).join('');
+}
+ge('btnAddEv').addEventListener('click',function(){openEv();});
+function openEv(pre){
+  editEvId=null;ge('emtitle').textContent='ADD EVENT';
+  ge('eti').value='';ge('ety').value='appointment';
+  ge('edt').value=pre||new Date().toISOString().split('T')[0];
+  ge('etm').value='';ge('eal').value='';ge('eno').value='';
+  ge('emo').classList.add('on');
+}
+function openEditEv(id){
+  var ev=evs.find(function(e){return e.id===id;});if(!ev)return;
+  editEvId=id;ge('emtitle').textContent='EDIT EVENT';
+  ge('eti').value=ev.ti||'';ge('ety').value=ev.ty||'appointment';
+  ge('edt').value=ev.d||'';ge('etm').value=ev.tm||'';
+  ge('eal').value=ev.al!==undefined?ev.al:'';ge('eno').value=ev.no||'';
+  ge('emo').classList.add('on');
+}
+ge('btnCancelEv').addEventListener('click',function(){ge('emo').classList.remove('on');});
+ge('emo').addEventListener('click',function(e){if(e.target===this)ge('emo').classList.remove('on');});
+ge('btnSaveEv').addEventListener('click',function(){
+  var title=ge('eti').value.trim(),date=ge('edt').value;
+  if(!title){alert('Title required!');return;}if(!date){alert('Date required!');return;}
+  var ev={id:editEvId||Date.now().toString(),ti:title,ty:ge('ety').value,d:date,
+    tm:ge('etm').value,al:ge('eal').value,no:ge('eno').value.trim()};
+  if(editEvId){evs[evs.findIndex(function(e){return e.id===editEvId;})]=ev;}else{evs.push(ev);}
+  saveEvs();schedAlarm(ev);ge('emo').classList.remove('on');rCal();rEvList();
+  toast('Event Saved',ev.ti+' added to calendar.',false);
+});
+function delEv(id){
+  if(!confirm('Delete this event?'))return;
+  evs=evs.filter(function(e){return e.id!==id;});saveEvs();rCal();rEvList();
+}
+var alarmTimers={};
+function schedAlarm(ev){
+  if(ev.al===''||ev.al===undefined||!ev.tm)return;
+  var ms=new Date(ev.d+'T'+ev.tm).getTime()-(parseInt(ev.al)*60000);
+  var delay=ms-Date.now();if(delay<0)return;
+  if(alarmTimers[ev.id])clearTimeout(alarmTimers[ev.id]);
+  alarmTimers[ev.id]=setTimeout(function(){
+    var mins=parseInt(ev.al);
+    toast('ALARM',ev.ti+(mins===0?' is starting now!':(mins>=60?' is in '+(mins/60)+' hour':' is in '+mins+' min')),true);
+  },delay);
+}
+
+// ── LISTINGS ─────────────────────────────────────────────────
+function rListings(){
+  var el=ge('llist');
+  if(!listings.length){el.innerHTML=emp('No Listings Yet','Tap + New Listing to create a post for Facebook Marketplace, OfferUp, or Craigslist');return;}
+  el.innerHTML=listings.map(function(l){
+    var photos=l.photos&&l.photos.length
+      ?'<div class="lcard-photos">'+l.photos.map(function(p,i){
+          return '<img src="'+p+'" data-action="viewphoto" data-src="'+p+'" alt="Photo '+(i+1)+'">';
+        }).join('')+'</div>'
+      :'';
+    return '<div class="lcard">'+photos+
+      '<div class="lcard-body">'+
+      '<div class="lcard-title">'+l.title+'</div>'+
+      '<div class="lcard-price">'+fmt(l.price)+'</div>'+
+      (l.desc?'<div class="lcard-desc">'+l.desc+'</div>':'')+
+      '<div class="lcard-meta">'+(l.loc?'&#128205; '+l.loc+'&nbsp;&nbsp;':'')+(l.contact?'&#128222; '+l.contact:'')+'</div>'+
+      '<div class="lcard-actions">'+
+      '<button class="btn btnp btnsm" data-action="copylisting" data-id="'+l.id+'">&#128203; Copy Post</button>'+
+      '<button class="btn btns btnsm" data-action="editlisting" data-id="'+l.id+'">Edit</button>'+
+      '<button class="btn btnd btnsm" data-action="dellisting" data-id="'+l.id+'">Delete</button>'+
+      '</div></div></div>';
+  }).join('');
+}
+
+function populateInvDrop(){
+  var sel=ge('linv');
+  sel.innerHTML='<option value="">-- Select item or create standalone --</option>';
+  items.filter(function(i){return i.status!=='sold';}).forEach(function(i){
+    var o=document.createElement('option');o.value=i.id;
+    o.textContent=i.n+(i.mo?' - '+i.mo:'')+' (In Stock)';sel.appendChild(o);
   });
-  function delEv(id) {
-    if (!confirm('Delete this event?')) return;
-    evs = evs.filter(function(e){ return e.id !== id; });
-    saveEvs(); rCal(); rEvList();
-  }
+}
+ge('linv').addEventListener('change',function(){
+  var item=items.find(function(i){return i.id===this.value;},this);if(!item)return;
+  ge('ltitle').value=item.n+(item.mo?' - '+item.mo:'');
+  if(item.sp)ge('lprice').value=item.sp;
+  if(!ge('lloc').value)ge('lloc').value='Freeport, TX';
+});
 
-  // ALARMS
-  var alarmTimers = {};
-  function schedAlarm(ev) {
-    if (ev.al===''||ev.al===undefined||!ev.tm) return;
-    var ms = new Date(ev.d+'T'+ev.tm).getTime() - (parseInt(ev.al)*60000);
-    var delay = ms - Date.now(); if (delay < 0) return;
-    if (alarmTimers[ev.id]) clearTimeout(alarmTimers[ev.id]);
-    alarmTimers[ev.id] = setTimeout(function() {
-      var mins = parseInt(ev.al);
-      var msg = ev.ti + (mins===0?' is starting now!':(mins>=60?' is in '+(mins/60)+' hour':' is in '+mins+' min'));
-      toast('ALARM', msg, true);
-      try { if ('Notification' in window && Notification.permission==='granted') new Notification('Capt. Petes Treasures',{body:ev.ti+(ev.no?' - '+ev.no:'')}); } catch(e) {}
-    }, delay);
-  }
-  function toast(title, msg, isAlarm) {
-    var tc=ge('tc'), t=document.createElement('div');
-    t.className = 'toast' + (isAlarm?' alarm':'');
-    t.innerHTML = '<div class="ttitle">'+title+'</div><div>'+msg+'</div>';
-    tc.appendChild(t);
-    setTimeout(function() { t.style.animation='tout .4s ease forwards'; setTimeout(function(){ t.remove(); },400); }, isAlarm?8000:3500);
-  }
-
-
-  // ─── LISTINGS ───────────────────────────────────────────────
-  var listings = JSON.parse(localStorage.getItem('pl') || '[]');
-  var editListingId = null;
-  var pendingPhotos = []; // base64 strings
-
-  function saveListings() {
-    // Save metadata (no photos) to localStorage - always small
-    var meta = listings.map(function(l) {
-      var copy = {}; Object.keys(l).forEach(function(k){ if(k!=='photos') copy[k]=l[k]; });
-      return copy;
-    });
-    try { localStorage.setItem('pl', JSON.stringify(meta)); } catch(e) {}
-    // Save photos to IndexedDB (no size limit issues)
-    listings.forEach(function(l) {
-      dbSavePhotos(l.id, l.photos||[]);
-    });
-  }
-
-  function rListings() {
-    var el = ge('llist');
-    if (!listings.length) { el.innerHTML = emp('No Listings Yet','Create a listing to share on Facebook Marketplace, OfferUp, Craigslist and more'); return; }
-    el.innerHTML = listings.map(function(l) {
-      var photos = l.photos && l.photos.length
-        ? '<div class="lcard-photos">'+l.photos.map(function(p){ return '<img src="'+p+'" data-action="viewphoto" data-src="'+p+'">'; }).join('')+'</div>'
-        : '';
-      return '<div class="lcard">'+photos+
-        '<div class="lcard-body">'+
-        '<div class="lcard-title">'+l.title+'</div>'+
-        '<div class="lcard-price">$'+Number(l.price||0).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})+'</div>'+
-        (l.desc?'<div class="lcard-desc">'+l.desc+'</div>':'')+
-        '<div class="lcard-meta">'+(l.loc?'&#128205; '+l.loc+'&nbsp;&nbsp;':'')+( l.contact?'&#128222; '+l.contact:'')+'</div>'+
-        '<div class="lcard-actions">'+
-        '<button class="btn btnp btnsm" data-action="copylisting" data-id="'+l.id+'">&#128203; Copy Post</button>'+
-        '<button class="btn btns btnsm" data-action="editlisting" data-id="'+l.id+'">Edit</button>'+
-        '<button class="btn btnd btnsm" data-action="dellisting" data-id="'+l.id+'">Delete</button>'+
-        '</div>'+
-        '</div></div>';
-    }).join('');
-  }
-
-  // Populate inventory dropdown when listing modal opens
-  function populateInvDropdown() {
-    var sel = ge('linv');
-    sel.innerHTML = '<option value="">-- Select item or create standalone --</option>';
-    items.filter(function(i){ return i.status !== 'sold'; }).forEach(function(i) {
-      var opt = document.createElement('option');
-      opt.value = i.id;
-      opt.textContent = i.n + (i.mo ? ' - '+i.mo : '') + ' (In Stock)';
-      sel.appendChild(opt);
-    });
-  }
-
-  ge('linv').addEventListener('change', function() {
-    var id = this.value;
-    if (!id) return;
-    var item = items.find(function(i){ return i.id === id; });
-    if (!item) return;
-    ge('ltitle').value = item.n + (item.mo ? ' - '+item.mo : '');
-    if (item.sp) ge('lprice').value = item.sp;
-  });
-
-  ge('btnAddListing').addEventListener('click', function() { openAddListing(); });
-
-  function openAddListing() {
-    editListingId = null; pendingPhotos = [];
-    ge('lmtitle').textContent = 'CREATE LISTING';
-    ge('ltitle').value=''; ge('lprice').value=''; ge('lloc').value='';
-    ge('ldesc').value=''; ge('lcontact').value='';
-    ge('lphotos').value='';
-    ge('lphoto-preview').innerHTML='';
-    populateInvDropdown();
-    ge('lmo').classList.add('on');
-  }
-
-  function openEditListing(id) {
-    var l = listings.find(function(x){ return x.id===id; }); if (!l) return;
-    editListingId = id; pendingPhotos = l.photos ? l.photos.slice() : [];
-    ge('lmtitle').textContent = 'EDIT LISTING';
-    ge('ltitle').value = l.title||''; ge('lprice').value = l.price||'';
-    ge('lloc').value = l.loc||''; ge('ldesc').value = l.desc||'';
-    ge('lcontact').value = l.contact||'';
-    ge('lphotos').value='';
-    populateInvDropdown();
-    ge('linv').value = l.invId||'';
-    renderPhotoPreviews();
-    ge('lmo').classList.add('on');
-  }
-
-  function renderPhotoPreviews() {
-    ge('lphoto-preview').innerHTML = pendingPhotos.map(function(p,i) {
-      return '<div style="position:relative;display:inline-block">'+
-        '<img src="'+p+'" style="width:80px;height:60px;object-fit:cover;border-radius:5px;border:1px solid #2a4a7a">'+
-        '<button data-action="removephoto" data-idx="'+i+'" style="position:absolute;top:-6px;right:-6px;background:#e05050;color:#fff;border:none;border-radius:50%;width:18px;height:18px;font-size:11px;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1">x</button>'+
-        '</div>';
-    }).join('');
-  }
-
-  ge('lphotos').addEventListener('change', function() {
-    var files = Array.from(this.files);
-    var remaining = 5 - pendingPhotos.length;
-    if (remaining <= 0) { alert('Max 5 photos reached. Remove one first.'); this.value=''; return; }
-    var toProcess = files.slice(0, remaining);
-    var processed = 0;
-    toProcess.forEach(function(file) {
-      var reader = new FileReader();
-      reader.onload = function(e) {
-        var img = new Image();
-        img.onload = function() {
-          // Compress: max 800px wide, 70% quality JPEG
-          var maxW = 600, maxH = 600;
-          var w = img.width, h = img.height;
-          if (w > maxW) { h = Math.round(h * maxW / w); w = maxW; }
-          if (h > maxH) { w = Math.round(w * maxH / h); h = maxH; }
-          var canvas = document.createElement('canvas');
-          canvas.width = w; canvas.height = h;
-          var ctx = canvas.getContext('2d');
-          ctx.drawImage(img, 0, 0, w, h);
-          var compressed = canvas.toDataURL('image/jpeg', 0.55);
-          // Check size ~30KB max per photo
-          if (compressed.length > 80000) {
-            canvas.width = Math.round(w*0.6); canvas.height = Math.round(h*0.6);
-            ctx = canvas.getContext('2d');
-            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-            compressed = canvas.toDataURL('image/jpeg', 0.45);
-          }
-          pendingPhotos.push(compressed);
-          processed++;
-          if (processed === toProcess.length) renderPhotoPreviews();
-        };
-        img.src = e.target.result;
+ge('btnAddListing').addEventListener('click',function(){openAddListing();});
+function openAddListing(){
+  editLId=null;pendingPhotos=[];
+  ge('lmtitle').textContent='CREATE LISTING';
+  ['ltitle','lprice','lloc','ldesc','lcontact'].forEach(function(id){ge(id).value='';});
+  ge('lphotos').value='';ge('lphoto-preview').innerHTML='';
+  populateInvDrop();ge('lmo').classList.add('on');
+}
+function openEditListing(id){
+  var l=listings.find(function(x){return x.id===id;});if(!l)return;
+  editLId=id;pendingPhotos=(l.photos||[]).slice();
+  ge('lmtitle').textContent='EDIT LISTING';
+  ge('ltitle').value=l.title||'';ge('lprice').value=l.price||'';
+  ge('lloc').value=l.loc||'';ge('ldesc').value=l.desc||'';
+  ge('lcontact').value=l.contact||'';ge('lphotos').value='';
+  populateInvDrop();ge('linv').value=l.invId||'';
+  renderPhotoPreviews();ge('lmo').classList.add('on');
+}
+function renderPhotoPreviews(){
+  ge('lphoto-preview').innerHTML=pendingPhotos.map(function(p,i){
+    return '<div class="photo-thumb-wrap">'+
+      '<img src="'+p+'" style="width:80px;height:64px;object-fit:cover;border-radius:5px;border:1px solid #2a4a7a">'+
+      '<button class="rm-photo" data-action="removephoto" data-id="'+i+'">x</button>'+
+      '</div>';
+  }).join('');
+}
+ge('lphotos').addEventListener('change',function(){
+  var files=Array.from(this.files),rem=5-pendingPhotos.length;
+  if(rem<=0){alert('Max 5 photos. Remove one first.');this.value='';return;}
+  var toLoad=files.slice(0,rem),done=0;
+  toLoad.forEach(function(file){
+    var rd=new FileReader();
+    rd.onload=function(e){
+      var img=new Image();
+      img.onload=function(){
+        var mw=700,mh=700,w=img.width,h=img.height;
+        if(w>mw){h=Math.round(h*mw/w);w=mw;}
+        if(h>mh){w=Math.round(w*mh/h);h=mh;}
+        var c=document.createElement('canvas');c.width=w;c.height=h;
+        var ctx=c.getContext('2d');ctx.drawImage(img,0,0,w,h);
+        pendingPhotos.push(c.toDataURL('image/jpeg',0.60));
+        if(++done===toLoad.length)renderPhotoPreviews();
       };
-      reader.readAsDataURL(file);
-    });
-    this.value='';
-  });
-
-  ge('btnCancelListing').addEventListener('click', function() { ge('lmo').classList.remove('on'); });
-  ge('lmo').addEventListener('click', function(e) { if (e.target===this) ge('lmo').classList.remove('on'); });
-
-  ge('btnSaveListing').addEventListener('click', function() {
-    var title = ge('ltitle').value.trim(), price = parseFloat(ge('lprice').value)||0;
-    if (!title) { alert('Title required!'); return; }
-    if (!price) { alert('Price required!'); return; }
-    var l = {
-      id: editListingId || Date.now().toString(),
-      invId: ge('linv').value,
-      title: title, price: price,
-      loc: ge('lloc').value.trim(),
-      desc: ge('ldesc').value.trim(),
-      contact: ge('lcontact').value.trim(),
-      photos: pendingPhotos.slice()
+      img.src=e.target.result;
     };
-    if (editListingId) { listings[listings.findIndex(function(x){ return x.id===editListingId; })] = l; }
-    else { listings.unshift(l); }
-    // Save photos to IndexedDB, then save metadata and refresh
-    dbSavePhotos(l.id, pendingPhotos.slice(), function() {
-      l.photos = pendingPhotos.slice();
-      saveListings(); ge('lmo').classList.remove('on'); rListings();
-      toast('Listing Saved', l.title + ' is ready to share!', false);
-    });
+    rd.readAsDataURL(file);
   });
+  this.value='';
+});
+ge('btnCancelListing').addEventListener('click',function(){ge('lmo').classList.remove('on');});
+ge('lmo').addEventListener('click',function(e){if(e.target===this)ge('lmo').classList.remove('on');});
+ge('btnSaveListing').addEventListener('click',function(){
+  var title=ge('ltitle').value.trim(),price=parseFloat(ge('lprice').value)||0;
+  if(!title){alert('Title required!');return;}if(!price){alert('Price required!');return;}
+  var l={id:editLId||Date.now().toString(),invId:ge('linv').value,title:title,price:price,
+    loc:ge('lloc').value.trim(),desc:ge('ldesc').value.trim(),contact:ge('lcontact').value.trim(),
+    photos:pendingPhotos.slice()};
+  if(editLId){listings[listings.findIndex(function(x){return x.id===editLId;})]=l;}else{listings.unshift(l);}
+  saveListings();ge('lmo').classList.remove('on');rListings();
+  toast('Listing Saved',l.title+' ready to share!',false);
+});
+function delListing(id){
+  if(!confirm('Delete this listing?'))return;
+  idbDel(id);listings=listings.filter(function(x){return x.id!==id;});
+  saveListings();rListings();
+}
+function copyListing(id){
+  var l=listings.find(function(x){return x.id===id;});if(!l)return;
+  var txt='BOAT FOR SALE\n\n';
+  txt+=l.title+'\n\n';
+  txt+='Asking: '+fmt(l.price)+'\n\n';
+  if(l.desc)txt+=l.desc+'\n\n';
+  if(l.loc)txt+='Location: '+l.loc+'\n';
+  if(l.contact)txt+=l.contact+'\n';
+  txt+='\n#forsale #boat #fishing #gulfcoast #freeporttx';
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(txt).then(function(){
+      toast('Copied!','Paste into Facebook Marketplace, OfferUp, or Craigslist!',false);
+    }).catch(function(){fallbackCopy(txt);});
+  }else{fallbackCopy(txt);}
+}
+function fallbackCopy(txt){
+  var ta=document.createElement('textarea');ta.value=txt;
+  ta.style.cssText='position:fixed;opacity:0;top:0;left:0';
+  document.body.appendChild(ta);ta.focus();ta.select();
+  try{document.execCommand('copy');toast('Copied!','Paste into Facebook Marketplace or Craigslist!',false);}catch(e){}
+  document.body.removeChild(ta);
+}
 
-  function copyListing(id) {
-    var l = listings.find(function(x){ return x.id===id; }); if (!l) return;
-    var txt = '🚤 FOR SALE: ' + l.title + '\n\n';
-    txt += '💰 Asking: $' + Number(l.price||0).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}) + '\n\n';
-    if (l.desc) txt += l.desc + '\n\n';
-    if (l.loc)  txt += '📍 Location: ' + l.loc + '\n';
-    if (l.contact) txt += '📞 ' + l.contact + '\n';
-    txt += '\n#forsale #boat #fishing #gulfcoast';
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(txt).then(function() {
-        toast('Copied!', 'Post text copied — paste into Facebook Marketplace, OfferUp, or Craigslist!', false);
-      });
-    } else {
-      var ta = document.createElement('textarea');
-      ta.value = txt; ta.style.position='fixed'; ta.style.opacity='0';
-      document.body.appendChild(ta); ta.focus(); ta.select();
-      try { document.execCommand('copy'); toast('Copied!', 'Paste into Facebook Marketplace or any classifieds!', false); } catch(e) {}
-      document.body.removeChild(ta);
-    }
-  }
+// Image viewer
+ge('imgview').addEventListener('click',function(){this.classList.remove('on');});
 
-  function delListing(id) {
-    if (!confirm('Delete this listing?')) return;
-    dbDeletePhotos(id);
-    listings = listings.filter(function(x){ return x.id!==id; });
-    saveListings(); rListings();
-  }
+// ── EVENT DELEGATION ─────────────────────────────────────────
+document.addEventListener('click',function(e){
+  var el=e.target.closest('[data-action]');if(!el)return;
+  var action=el.getAttribute('data-action'),id=el.getAttribute('data-id');
+  if(action==='edit')openEdit(id);
+  else if(action==='del')delItem(id);
+  else if(action==='mksold')mkSold(id);
+  else if(action==='editev')openEditEv(id);
+  else if(action==='delev')delEv(id);
+  else if(action==='selday')openEv(id);
+  else if(action==='editlisting')openEditListing(id);
+  else if(action==='dellisting')delListing(id);
+  else if(action==='copylisting')copyListing(id);
+  else if(action==='removephoto'){pendingPhotos.splice(parseInt(id),1);renderPhotoPreviews();}
+  else if(action==='viewphoto'){ge('imgviewImg').src=el.getAttribute('data-src');ge('imgview').classList.add('on');}
+});
 
-  // Image viewer modal
-  var imgModal = document.createElement('div');
-  imgModal.className = 'img-modal';
-  imgModal.innerHTML = '<img id="imgModalImg" src="">';
-  document.body.appendChild(imgModal);
-  imgModal.addEventListener('click', function() { this.classList.remove('on'); });
+// ── TOAST ────────────────────────────────────────────────────
+function toast(title,msg,isAlarm){
+  var tc=ge('tc'),t=document.createElement('div');
+  t.className='toast'+(isAlarm?' alarm':'');
+  t.innerHTML='<div class="ttitle">'+title+'</div><div>'+msg+'</div>';
+  tc.appendChild(t);
+  setTimeout(function(){t.style.animation='tout .4s ease forwards';setTimeout(function(){t.remove();},400);},isAlarm?8000:3500);
+}
 
-  // Wire up listing actions via existing event delegation
-  // (already handled in main delegator below — add cases)
-  // INIT
-  if ('Notification' in window && Notification.permission==='default') Notification.requestPermission();
-  evs.forEach(function(ev){ schedAlarm(ev); });
-  // Load listings metadata, then photos from IndexedDB
-  listings = JSON.parse(localStorage.getItem('pl') || '[]');
-  loadAllListingPhotos(function() {
-    // Photos loaded - if on listings page refresh it
-    if (document.getElementById('listings').classList.contains('on')) rListings();
-  });
-  rDash();
+// ── INIT ─────────────────────────────────────────────────────
+if('Notification' in window&&Notification.permission==='default')Notification.requestPermission();
+evs.forEach(function(ev){schedAlarm(ev);});
+// Load photos from IndexedDB then render
+loadPhotos(function(){
+  if(ge('listings').classList.contains('on'))rListings();
+});
+rDash();
 
 })();
 </script>

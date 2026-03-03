@@ -675,7 +675,13 @@ footer{text-align:center;padding:22px;font-family:'Bebas Neue',sans-serif;font-s
   var editListingId = null;
   var pendingPhotos = []; // base64 strings
 
-  function saveListings() { localStorage.setItem('pl', JSON.stringify(listings)); }
+  function saveListings() {
+    try {
+      localStorage.setItem('pl', JSON.stringify(listings));
+    } catch(e) {
+      alert('Storage full! Try removing some photos from listings to free up space.');
+    }
+  }
 
   function rListings() {
     var el = ge('llist');
@@ -760,11 +766,28 @@ footer{text-align:center;padding:22px;font-family:'Bebas Neue',sans-serif;font-s
     var files = Array.from(this.files);
     var remaining = 5 - pendingPhotos.length;
     if (remaining <= 0) { alert('Max 5 photos reached. Remove one first.'); this.value=''; return; }
-    files.slice(0, remaining).forEach(function(file) {
+    var toProcess = files.slice(0, remaining);
+    var processed = 0;
+    toProcess.forEach(function(file) {
       var reader = new FileReader();
       reader.onload = function(e) {
-        pendingPhotos.push(e.target.result);
-        renderPhotoPreviews();
+        var img = new Image();
+        img.onload = function() {
+          // Compress: max 800px wide, 70% quality JPEG
+          var maxW = 800, maxH = 800;
+          var w = img.width, h = img.height;
+          if (w > maxW) { h = Math.round(h * maxW / w); w = maxW; }
+          if (h > maxH) { w = Math.round(w * maxH / h); h = maxH; }
+          var canvas = document.createElement('canvas');
+          canvas.width = w; canvas.height = h;
+          var ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, w, h);
+          var compressed = canvas.toDataURL('image/jpeg', 0.70);
+          pendingPhotos.push(compressed);
+          processed++;
+          if (processed === toProcess.length) renderPhotoPreviews();
+        };
+        img.src = e.target.result;
       };
       reader.readAsDataURL(file);
     });

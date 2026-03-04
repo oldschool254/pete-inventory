@@ -362,39 +362,17 @@ function emp(t,s){return '<div class="empty"><div class="ei">&#128676;</div><div
 function saveItems(){try{localStorage.setItem('pt',JSON.stringify(items));}catch(e){}}
 function saveEvs(){try{localStorage.setItem('pe',JSON.stringify(evs));}catch(e){}}
 
-// ── IndexedDB for photos ──────────────────────────────────────
-var IDB=null;
-function openIDB(cb){
-  if(IDB){cb(IDB);return;}
-  var r=indexedDB.open('PeteTreasures',1);
-  r.onupgradeneeded=function(e){e.target.result.createObjectStore('photos');};
-  r.onsuccess=function(e){IDB=e.target.result;cb(IDB);};
-  r.onerror=function(){cb(null);};
+// ── Photo storage: simple localStorage per-listing ──────────
+function lsSetPhotos(id,photos){
+  try{localStorage.setItem('pl_p_'+id,JSON.stringify(photos));}catch(e){
+    try{localStorage.setItem('pl_p_'+id,JSON.stringify(photos.slice(0,2)));}catch(e2){}
+  }
 }
-function idbSet(id,data,cb){
-  openIDB(function(db){
-    if(!db){cb&&cb();return;}
-    var tx=db.transaction('photos','readwrite');
-    tx.objectStore('photos').put(data,id);
-    tx.oncomplete=function(){cb&&cb();};
-    tx.onerror=function(){cb&&cb();};
-  });
+function lsGetPhotos(id){
+  try{var v=localStorage.getItem('pl_p_'+id);return v?JSON.parse(v):[];}catch(e){return[];}
 }
-function idbGet(id,cb){
-  openIDB(function(db){
-    if(!db){cb([]);return;}
-    var tx=db.transaction('photos','readonly');
-    var r=tx.objectStore('photos').get(id);
-    r.onsuccess=function(){cb(r.result||[]);};
-    r.onerror=function(){cb([]);};
-  });
-}
-function idbDel(id){
-  openIDB(function(db){
-    if(!db)return;
-    db.transaction('photos','readwrite').objectStore('photos').delete(id);
-  });
-}
+function lsDelPhotos(id){try{localStorage.removeItem('pl_p_'+id);}catch(e){}}
+
 
 // Save listings (metadata only to localStorage, photos to IDB)
 function saveListings(){
@@ -732,12 +710,14 @@ ge('lphotos').addEventListener('change',function(){
     rd.onload=function(e){
       var img=new Image();
       img.onload=function(){
-        var mw=700,mh=700,w=img.width,h=img.height;
+        var mw=480,mh=480,w=img.width,h=img.height;
         if(w>mw){h=Math.round(h*mw/w);w=mw;}
         if(h>mh){w=Math.round(w*mh/h);h=mh;}
         var c=document.createElement('canvas');c.width=w;c.height=h;
         var ctx=c.getContext('2d');ctx.drawImage(img,0,0,w,h);
-        pendingPhotos.push(c.toDataURL('image/jpeg',0.60));
+        var comp=c.toDataURL('image/jpeg',0.40);
+        if(comp.length>55000){c.width=Math.round(w*.6);c.height=Math.round(h*.6);ctx=c.getContext('2d');ctx.drawImage(img,0,0,c.width,c.height);comp=c.toDataURL('image/jpeg',0.32);}
+        pendingPhotos.push(comp);
         if(++done===toLoad.length)renderPhotoPreviews();
       };
       img.src=e.target.result;
@@ -760,7 +740,7 @@ ge('btnSaveListing').addEventListener('click',function(){
 });
 function delListing(id){
   if(!confirm('Delete this listing?'))return;
-  idbDel(id);listings=listings.filter(function(x){return x.id!==id;});
+  lsDelPhotos(id);listings=listings.filter(function(x){return x.id!==id;});
   saveListings();rListings();
 }
 function copyListing(id){
